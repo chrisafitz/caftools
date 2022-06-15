@@ -18,8 +18,8 @@ split_path = current_path.split('/')
 base_path = '/'.join(split_path[:-1])
 workspace_path = '{}/workspace'.format(base_path)
 
-#folder_to_analyze = 'bmim_tfsi_neat'
-os.chdir('{}/{}'.format(workspace_path,folde))
+folder_to_analyze = 'bmim_tfsi_neat'
+os.chdir('{}/{}'.format(workspace_path,folder_to_analyze))
 
 
 ### Unwrapping
