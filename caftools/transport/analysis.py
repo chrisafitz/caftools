@@ -19,7 +19,7 @@ home_path = '/'.join(split_path[:-2])
 base_path = '{}/project'.format(home_path)
 workspace_path = '{}/workspace'.format(base_path)
 
-folder_to_analyze = input("List the folder to analyze (string): ")
+folder_to_analyze = input("List the folder to analyze: ")
 os.chdir('{}/{}'.format(workspace_path,folder_to_analyze))
 
 
