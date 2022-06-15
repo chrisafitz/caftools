@@ -1,0 +1,8 @@
+README.md
+setup.py
+caftools/__init__.py
+caftools.egg-info/PKG-INFO
+caftools.egg-info/SOURCES.txt
+caftools.egg-info/dependency_links.txt
+caftools.egg-info/not-zip-safe
+caftools.egg-info/top_level.txt
