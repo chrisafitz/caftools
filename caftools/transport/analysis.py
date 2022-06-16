@@ -76,6 +76,7 @@ def msd():
         ax.text(((max(trj.time)/6)*1.5), (max(MSD)/5)*4.5,"Slope: {} nm^2/ps \n Diffussion coef: {} m^2/s \n T:{}K \n ".format(slope,dif_c, tempe) , horizontalalignment='center', verticalalignment = 'center',bbox=dict(facecolor='orange', alpha=0.2))
         ax.set_xlabel('Simulation time (ps)')
         ax.set_ylabel('MSD (nm^2)')
+        fig.suptitle('MSD for {}'.format(name))
         fig.savefig('msd-{}-overall-{}.pdf'.format(mol,name))
     
     def _run_multiple(trj):
