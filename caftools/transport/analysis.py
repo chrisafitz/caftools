@@ -236,7 +236,7 @@ def density():
     plt.ylabel('desnity (kg/m^3)')
     fig.suptitle('Density Profile Throughout Simulation')
     currfol = os.getcwd()
-    split_currfol = currfol.split()
+    split_currfol = currfol.split('/')
     currfol_name = split_currfol[-1]
     print(currfol_name)
     plt.savefig('density profile {}.pdf'.format(currfol_name))
