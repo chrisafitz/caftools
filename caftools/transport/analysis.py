@@ -19,8 +19,8 @@ home_path = '/'.join(split_path[:-2])
 base_path = '{}/project'.format(home_path)
 workspace_path = '{}/workspace'.format(base_path)
 
-folder_to_analyze = input("List the folder to analyze: ")
-os.chdir('{}/{}'.format(workspace_path,folder_to_analyze))
+#folder_to_analyze = input("List the folder to analyze: ")
+#os.chdir('{}/{}'.format(workspace_path,folder_to_analyze))
 
 
 ### Unwrapping
@@ -162,7 +162,7 @@ def rdf(atom1,atom2,stride=100):         # ex for atom1 -- resname bmim and name
             
             plt.plot(r,gr)
             plt.xlabel('distance (nm)')
-            plt.ylabel('g(r)')
+            plt.ylabel('g (r)')
             name1 = atom1.split()
             atom1_title = '{}({})'.format(name1[1],name1[-1])
             name2 = atom2.split()
