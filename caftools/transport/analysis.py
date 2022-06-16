@@ -11,7 +11,7 @@ from mtools.post_process import calc_msd
 from mtools.post_process import compute_cn
 import unyt as u
 from scipy import stats
-
+from mtools.post_process import calc_density
 
 current_path = os.getcwd()
 split_path = current_path.split('/')
@@ -131,8 +131,6 @@ def msd():
             continue
         print(mol)
         sliced = trj.atom_slice(indices)
-        print(type(sliced))
-        print(sliced[4])
         print("Sliced selection in pore!")
         D, MSD = _run_overall(sliced, mol)
         stdev = _std(sliced,3)
@@ -230,6 +228,17 @@ def density():
     trj_file = ('sample_com_unwrapped.xtc')
     trj = md.load(trj_file, top=top_file)
     
-    rho = md.density(trj)
+    rho = calc_density(trj)
+    
+    fix, ax = plt.subplots()
+    plt.plot(rho)
+    plt.xlabel('time (ns)')
+    plt.ylabel('desnity (kg/m^3)')
+    fig.suptitle('Density Over Simulation')
+    currfol = os.getcwd()
+    split_currfol = currfol.split()
+    currfol_name = split_currfol[-1]
+    plt.savefig('density profile {}.pdf'.format(currfol_name))
+    print('done')
     
     
