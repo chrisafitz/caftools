@@ -237,7 +237,6 @@ def density():
     currfol = os.getcwd()
     split_currfol = currfol.split('/')
     currfol_name = split_currfol[-1]
-    print(currfol_name)
     fig.suptitle('{} Density Profile'.format(currfol_name))
     plt.savefig('density profile {}.pdf'.format(currfol_name))
     print('done')
