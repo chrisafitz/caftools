@@ -64,7 +64,7 @@ def msd():
         return D, MSD
     
     
-    def std(sliced,n_chunks):
+    def _std(sliced,n_chunks):
         frames = sliced.n_frames
         each_chunk = frames/n_chunks
         start_frame = 0
@@ -133,7 +133,7 @@ def msd():
         sliced = trj.atom_slice(indices)
         print("Sliced selection in pore!")
         D, MSD = _run_overall(sliced, mol)
-        stdev = std(sliced,3)
+        stdev = _std(sliced,3)
         _save_overall( mol, sliced, MSD, stdev)
         ###
        
