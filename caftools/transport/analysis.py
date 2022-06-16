@@ -230,7 +230,7 @@ def density():
     
     rho = calc_density(trj)
     
-    fix, ax = plt.subplots()
+    fig, ax = plt.subplots()
     plt.plot(rho)
     plt.xlabel('time (ns)')
     plt.ylabel('desnity (kg/m^3)')
