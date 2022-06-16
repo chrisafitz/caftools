@@ -201,5 +201,8 @@ def neconductivity(ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion a
     V *= u.m**3
 
     conductivity = N / (V*kT) * q ** 2 * (D_cat + D_an)
-    print("         The Nernst-Einstein conductivity is: "+ str(conductivity))
-    return conductivity
+    print("The Nernst-Einstein conductivity is: "+ str(conductivity))
+    with open("NE_Conductivity.txt","w") as file:
+        file.write("The Nernst-Einstein conductivity is: "+ str(conductivity))
+    
+    
