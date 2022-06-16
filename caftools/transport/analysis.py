@@ -131,6 +131,8 @@ def msd():
             continue
         print(mol)
         sliced = trj.atom_slice(indices)
+        print(type(sliced))
+        print(len(sliced))
         print("Sliced selection in pore!")
         D, MSD = _run_overall(sliced, mol)
         stdev = _std(sliced,3)
