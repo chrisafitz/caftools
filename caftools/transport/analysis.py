@@ -62,8 +62,23 @@ def msd():
     def _run_overall(trj, mol):
         D, MSD, x_fit, y_fit = calc_msd(trj)
         return D, MSD
-
-    def _save_overall( mol, trj, MSD):
+    
+    
+    def std(sliced,n_chunks):
+        frames = sliced.n_frames
+        each_chunk = frames/n_chunks
+        start_frame = 0
+        D_values = []
+        for i in range(n_chunks):
+            traj_chunk = sliced[start_frame:i*each_chunk]
+            D, MSD = _run_overall(traj_chunk, mol)
+            D_values.append(D)
+            start_frame += i
+        stdev = np.std(D_values)
+        return stdev
+        
+    
+    def _save_overall( mol, trj, MSD, stdev):
         name = "Christopher_2022"
         np.savetxt( 'msd-{}-overall-{}.txt'.format(mol, name),np.transpose(np.vstack([trj.time, MSD])),header='# Time (ps)\tMSD (nm^2)')
         tempe = 298 #write the temperature
@@ -73,7 +88,7 @@ def msd():
         ax.plot(trj.time, res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
         slope = '{:.2e}'.format(res.slope)
         dif_c = '{:.2e}'.format((res.slope)*(1/(1*(10**18)))*(1/6)*(1*(10**12)))
-        ax.text(((max(trj.time)/6)*1.5), (max(MSD)/5)*4.5,"Slope: {} nm^2/ps \n Diffussion coef: {} m^2/s \n T:{}K \n ".format(slope,dif_c, tempe) , horizontalalignment='center', verticalalignment = 'center',bbox=dict(facecolor='orange', alpha=0.2))
+        ax.text(((max(trj.time)/6)*1.5), (max(MSD)/5)*4.5,"Slope: {} nm^2/ps \n Diffussion coef: {} +- {} m^2/s \n T:{}K \n ".format(slope,dif_c,stdev,tempe) , horizontalalignment='center', verticalalignment = 'center',bbox=dict(facecolor='orange', alpha=0.2))
         ax.set_xlabel('Simulation time (ps)')
         ax.set_ylabel('MSD (nm^2)')
         fig.suptitle('MSD for {}'.format(mol))
@@ -118,7 +133,8 @@ def msd():
         sliced = trj.atom_slice(indices)
         print("Sliced selection in pore!")
         D, MSD = _run_overall(sliced, mol)
-        _save_overall( mol, sliced, MSD)
+        stdev = std(sliced,3)
+        _save_overall( mol, sliced, MSD, stdev)
         ###
        
        
@@ -204,5 +220,14 @@ def neconductivity(ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion a
     print("The Nernst-Einstein conductivity is: "+ str(conductivity))
     with open("NE_Conductivity.txt","w") as file:
         file.write("The Nernst-Einstein conductivity is: "+ str(conductivity))
+        
+### Density
+def density():
+    
+    top_file = ('com.gro')
+    trj_file = ('sample_com_unwrapped.xtc')
+    trj = md.load(trj_file, top=top_file)
+    
+    rho = md.density(trj)
     
     
