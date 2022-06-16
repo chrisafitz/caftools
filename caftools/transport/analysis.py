@@ -148,7 +148,7 @@ def rdf(atom1,atom2,stride=100):         # ex for atom1 -- resname bmim and name
     
 
     combos = combinations(list(selections.keys()),2)
-
+    print(combos)
 
     for combo in combos:
         if len(selections[combo[0]]) != 0 and len(selections[combo[1]]) != 0:
