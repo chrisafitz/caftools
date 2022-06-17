@@ -231,7 +231,17 @@ def density():
     trj_file = ('sample_com_unwrapped.xtc')
     trj = md.load(trj_file, top=top_file)
     
-    rho = calc_density(trj)
+    MW = {
+                    "acn": 41.05,
+                    "li_tfsi": 287.09,
+                    "emim_tfsi": 391.31,
+                    "bmim_tfsi": 419.36,
+                    "hmim_tfsi": 447.4,
+                    "omim_tfsi":475.4,
+                    "water": 18.01528
+                }  # g/mol
+    
+    rho = md.density(trj,MW)
     
     fig, ax = plt.subplots()
     plt.plot(rho)
