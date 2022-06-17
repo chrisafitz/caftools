@@ -69,14 +69,13 @@ def msd():
         each_chunk = frames//n_chunks
         start_frame = 0
         D_values = []
-        for i in range(n_chunks+1):
+        for i in range(n_chunks):
             if i == 0:
                 pass
             else:
                 traj_chunk = sliced[i*each_chunk:(i+1)*each_chunk]
                 D, MSD = _run_overall(traj_chunk, mol)
-                D_values.append(D)
-        D_values = D_values[1:3]             
+                D_values.append(D)           
         stdev = np.std(D_values)
         return stdev
         
