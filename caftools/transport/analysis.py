@@ -75,7 +75,8 @@ def msd():
             else:
                 traj_chunk = sliced[i*each_chunk:(i+1)*each_chunk]
                 D, MSD = _run_overall(traj_chunk, mol)
-                D_values.append(D)             
+                D_values.append(D)
+        D_values = D_values[1:3]             
         stdev = np.std(D_values)
         return stdev
         
@@ -90,7 +91,7 @@ def msd():
         ax.plot(trj.time, res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
         slope = '{:.2e}'.format(res.slope)
         dif_c = '{:.2e}'.format((res.slope)*(1/(1*(10**18)))*(1/6)*(1*(10**12)))
-        ax.text(((max(trj.time)/6)*1.5), (max(MSD)/5)*4.5,"Slope: {} nm^2/ps \n Diffussion coef: {} +- {} m^2/s \n T:{}K \n ".format(slope,dif_c,stdev,tempe) , horizontalalignment='center', verticalalignment = 'center',bbox=dict(facecolor='orange', alpha=0.2))
+        ax.text(((max(trj.time)/6)*1.5), (max(MSD)/5)*4.5,"Slope: {} nm^2/ps \n Diffussion coef: {} +- {.2e} m^2/s \n T:{}K \n ".format(slope,dif_c,stdev,tempe) , horizontalalignment='center', verticalalignment = 'center',bbox=dict(facecolor='orange', alpha=0.2))
         ax.set_xlabel('Simulation time (ps)')
         ax.set_ylabel('MSD (nm^2)')
         fig.suptitle('MSD for {}'.format(mol))
