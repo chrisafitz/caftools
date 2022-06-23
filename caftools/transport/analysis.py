@@ -389,17 +389,17 @@ def vhf(atom1,atom2,temp=298,stride=100):
    
     selections = dict()
     if 'li' in atom1 or 'emim' in atom1 or 'bmim' in atom1:
-        selections['cation'] = trj.topology.select(atom1)
+        selections['cation'] = atom1
     elif 'tfsi' in atom1:
-        selections['anion'] = trj.topology.select(atom1)
+        selections['anion'] = atom1
     elif 'acn' in atom1 or 'wat' in atom1:
-        selections['solvent'] = trj.topology.select(atom1)
+        selections['solvent'] = atom1
     if 'li' in atom2 or 'emim' in atom2 or 'bmim' in atom2:
-        selections['cation'] = trj.topology.select(atom2)
+        selections['cation'] =atom2
     elif 'tfsi' in atom2:
-        selections['anion'] = trj.topology.select(atom2)
+        selections['anion'] = atom2
     elif 'acn' in atom2 or 'wat' in atom2:
-        selections['solvent'] = trj.topology.select(atom2)
+        selections['solvent'] = atom2
 
     
 
@@ -413,11 +413,11 @@ def vhf(atom1,atom2,temp=298,stride=100):
     start=time.time()
     for pair in combos:
         print(pair)
-        if len(selections[pair[0]]) != 0 and len(selections[pair[1]]) != 0:
+        if len(trj.topology.select(selections[pair[0]])) != 0 and len(trj.topology.select(selections[pair[1]])) != 0:
             print('running vhf between {0} ({1}) \tand\t{2} ({3})\t...'.format(pair[0],
-                                                                        len(selections[pair[0]]),
+                                                                        len(trj.topology.select(selections[pair[0]])),
                                                                         pair[1],
-                                                                        len(selections[pair[1]])))
+                                                                        len(trj.topology.select(selections[pair[1]]))))
             val1 = (selections[pair[0]])
             val2 = (selections[pair[1]])
             print(val1,val2)
