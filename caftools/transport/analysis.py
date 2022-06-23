@@ -434,6 +434,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             for ii in range(numplots):
                 frame = ii * ((g_r_t.shape[0])//(numplots-1) - 1)
                 plt.plot(r,g_r_t[frame])
+                plt.legend('Frame: '.format(frame))
 
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
@@ -441,7 +442,6 @@ def vhf(atom1,atom2,temp=298,stride=100):
             atom1_title = '{}({})'.format(name1[1],name1[-1])
             name2 = atom2.split()
             atom2_title = '{}({})'.format(name2[1],name2[-1])
-            plt.legend()
             fig.suptitle('VHF {} - {}'.format(atom1_title,atom2_title))
             
             
