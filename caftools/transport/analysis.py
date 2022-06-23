@@ -369,7 +369,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             if g_r_t is None:
                 g_r_t = np.zeros_like(g_r_t_frame)
             g_r_t += g_r_t_frame
-            print(g_r_t)
+            print(type(g_r_t))
 
         return r, g_r_t
     
@@ -448,7 +448,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
     print('done')
      '''            
             
-    
+    '''
     #saving to .txt file
     np.savetxt(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"),g_r_t, header = "# Van Hove Function, dt: {} fs, dr: {}".format(dt, np.unique(np.round(np.diff(trj.time), 6))[0]),)
     np.savetxt(os.path.join(job.workspace(),f"r_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), r, header="# Positions" )
@@ -485,4 +485,4 @@ def vhf(atom1,atom2,temp=298,stride=100):
         labels.append(text)
     ax.legend(labels)
     plt.savefig(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.pdf"))
-
+    '''
