@@ -431,10 +431,12 @@ def vhf(atom1,atom2,temp=298,stride=100):
             
             fig,ax = plt.subplots()
             numplots = 3
+            frames = []
             for ii in range(numplots):
                 frame = ii * ((g_r_t.shape[0])//(numplots-1) - 1)
+                frames.append(frame)
                 plt.plot(r,g_r_t[frame])
-                plt.legend('{}'.format(frame))
+                plt.legend(frames[:])
 
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
