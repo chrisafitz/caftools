@@ -437,7 +437,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             plt.plot(r,g_r_t)
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
-            print(r)
+            print('r: {}'.format(r))
             print(g_r_t)
             
             
