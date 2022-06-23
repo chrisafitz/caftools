@@ -371,7 +371,6 @@ def vhf(atom1,atom2,temp=298,stride=100):
             if g_r_t is None:
                 g_r_t = np.zeros_like(g_r_t_frame)
             g_r_t += g_r_t_frame
-            print(g_r_t)
             
 
         return r, g_r_t
@@ -408,7 +407,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
     
 
     combos = combinations(list(selections.keys()),2)
-    chunk_length = 1000 # frames, 10 fs output
+    chunk_length = 200 # frames, 10 fs output
     cpu_count = 32
     n_chunks = 2000 # make higher if more averaging needed for smoother curves
     r_max = radius # in nm
@@ -432,14 +431,17 @@ def vhf(atom1,atom2,temp=298,stride=100):
             t = trj.time[:chunk_length+1]
             t_save = t - t[0]
             
+            print(r.shape)
+            print(g_r_t.shape)
             
+            '''
             print('len of grt: {}'.format(len(g_r_t)))
             plt.plot(r,g_r_t,color = 'b')
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
             print('r: {}'.format(r))
             print(g_r_t)
-            
+            '''
             
     '''   
     fig,ax = plt.subplots()
