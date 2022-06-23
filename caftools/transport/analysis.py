@@ -408,9 +408,9 @@ def vhf(atom1,atom2,temp=298,stride=100):
     
 
     combos = combinations(list(selections.keys()),2)
-    chunk_length = 200 # frames, 10 fs output
+    chunk_length = 1000 # frames, 10 fs output
     cpu_count = 32
-    n_chunks = 10000 # make higher if more averaging needed for smoother curves
+    n_chunks = 2000 # make higher if more averaging needed for smoother curves
     r_max = radius # in nm
     #Define chunk start frames
     chunk_starts = np.linspace(0, trj.n_frames-chunk_length, n_chunks, dtype=int)
