@@ -403,7 +403,8 @@ def vhf(atom1,atom2,temp=298,stride=100):
     
 
     combos = combinations(list(selections.keys()),2)
-   
+    print(combos)
+    print(selections)
     chunk_length = 200 # frames, 10 fs output
     cpu_count = 32
     n_chunks = 2000 # make higher if more averaging needed for smoother curves
