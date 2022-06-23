@@ -438,7 +438,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             fig,ax = plt.subplots()
             for ii in range(g_r_t.shape[0]):
                 if ii == 0 or ii == g_r_t.shape[0]/2 or ii == g_r_t.shape[0]:
-                    plt.plot(r,g_r_t(ii),color='r')
+                    plt.plot(r,g_r_t[ii],color='r')
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
             
