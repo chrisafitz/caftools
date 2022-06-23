@@ -429,7 +429,22 @@ def vhf(atom1,atom2,temp=298,stride=100):
             
             print(r)
             print(g_r_t)
-        
+
+            
+            
+            fig,ax = plt.subplots()
+            plt.plot(r,gr)
+            plt.xlabel('distance (nm)')
+            plt.ylabel('g (r)')
+            name1 = atom1.split()
+            atom1_title = '{}({})'.format(name1[1],name1[-1])
+            name2 = atom2.split()
+            atom2_title = '{}({})'.format(name2[1],name2[-1])
+            fig.suptitle('RDF {} - {}'.format(atom1_title,atom2_title))
+            plt.savefig('rdf {} - {}.pdf'.format(atom1_title,atom2_title))
+            print('done')
+            
+            
             '''
             #saving to .txt file
             np.savetxt(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"),g_r_t, header = "# Van Hove Function, dt: {} fs, dr: {}".format(dt, np.unique(np.round(np.diff(trj.time), 6))[0]),)
