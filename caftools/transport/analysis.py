@@ -430,15 +430,10 @@ def vhf(atom1,atom2,temp=298,stride=100):
             t = trj.time[:chunk_length+1]
             t_save = t - t[0]
             
-            print(r.shape)
-            print(g_r_t.shape)
-            print(g_r_t.shape[0])
-            
-            
             fig,ax = plt.subplots()
             for ii in range(g_r_t.shape[0]):
                 if ii == 0 or ii == g_r_t.shape[0]/2 or ii == g_r_t.shape[0]:
-                    plt.plot(r,g_r_t[ii],color='r')
+                    plt.plot(r,g_r_t[ii])
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
             
