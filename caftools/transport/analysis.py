@@ -402,7 +402,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
         selections['solvent'] = trj.topology.select(atom2)
     
 
-    combos = combinations(list(selections.keys()),2)
+    combos = list(combinations(list(selections.keys()),2))
     print(combos)
     print(selections)
     chunk_length = 200 # frames, 10 fs output
@@ -413,6 +413,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
     chunk_starts = np.linspace(0, trj.n_frames-chunk_length, n_chunks, dtype=int)
     start=time.time()
     for pair in combos:
+        print(pair)
         if len(selections[pair[0]]) != 0 and len(selections[pair[1]]) != 0:
             print('running vhf between {0} ({1}) \tand\t{2} ({3})\t...'.format(pair[0],
                                                                         len(selections[pair[0]]),
