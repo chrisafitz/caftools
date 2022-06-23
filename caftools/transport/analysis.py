@@ -445,23 +445,9 @@ def vhf(atom1,atom2,temp=298,stride=100):
             name2 = atom2.split()
             atom2_title = '{}({})'.format(name2[1],name2[-1])
             fig.suptitle('VHF {} - {}'.format(atom1_title,atom2_title))
+            plt.savefig('vhf {} - {}.pdf'.format(atom1_title,atom2_title))
+            print('done')
             
-            
-    '''   
-    fig,ax = plt.subplots()
-    plt.plot(r,g_r_t)
-    plt.xlabel('distance (nm)')
-    plt.ylabel('g (r,t)')
-    
-    
-    name1 = atom1.split()
-    atom1_title = '{}({})'.format(name1[1],name1[-1])
-    name2 = atom2.split()
-    atom2_title = '{}({})'.format(name2[1],name2[-1])
-    fig.suptitle('VHF {} - {}'.format(atom1_title,atom2_title))
-    plt.savefig('vhf {} - {}.pdf'.format(atom1_title,atom2_title))
-    print('done')
-     '''            
             
     '''
     #saving to .txt file
