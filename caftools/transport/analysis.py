@@ -414,7 +414,6 @@ def vhf(atom1,atom2,temp=298,stride=100):
     #Define chunk start frames
     chunk_starts = np.linspace(0, trj.n_frames-chunk_length, n_chunks, dtype=int)
     start=time.time()
-    fig,ax = plt.subplots() ###############
     for pair in combos:
         print(pair)
         if len(trj.topology.select(selections[pair[0]])) != 0 and len(trj.topology.select(selections[pair[1]])) != 0:
@@ -435,14 +434,14 @@ def vhf(atom1,atom2,temp=298,stride=100):
             print(g_r_t.shape)
             print(g_r_t.shape[0])
             
-            '''
-            print('len of grt: {}'.format(len(g_r_t)))
-            plt.plot(r,g_r_t,color = 'b')
+            
+            fig,ax = plt.subplots()
+            for ii in range(g_r_t.shape[0]):
+                if ii == 0 or ii == g_r_t.shape[0]/2 or ii == g_r_t.shape[0]:
+                    plt.plot(r,g_r_t(ii),color='r')
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
-            print('r: {}'.format(r))
-            print(g_r_t)
-            '''
+            
             
     '''   
     fig,ax = plt.subplots()
