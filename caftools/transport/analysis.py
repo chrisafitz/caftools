@@ -350,7 +350,8 @@ def vhf(atom1,atom2,temp=298,stride=100):
         g_r_t = None
         pbar = ProgressBar()
 
-        for i in pbar(range(n_chunks)):
+        #for i in pbar(range(n_chunks)):
+        for i in pbar(range(1)):
             times = list()
             for j in range(chunk_length):
                 times.append([chunk_length * i, chunk_length * i + j])
@@ -370,6 +371,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             if g_r_t is None:
                 g_r_t = np.zeros_like(g_r_t_frame)
             g_r_t += g_r_t_frame
+            print(g_r_t)
             
 
         return r, g_r_t
@@ -430,13 +432,14 @@ def vhf(atom1,atom2,temp=298,stride=100):
             t = trj.time[:chunk_length+1]
             t_save = t - t[0]
             
+            '''
             print('len of grt: {}'.format(len(g_r_t)))
             plt.plot(r,g_r_t)
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
             print(r)
             print(g_r_t)
-
+            '''
             
     '''   
     fig,ax = plt.subplots()
