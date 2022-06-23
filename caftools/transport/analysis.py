@@ -345,6 +345,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             self_correlation = False
 
         n_chunks = int(trj.n_frames / chunk_length)
+        print('chunks: '.format(n_chunks))
 
         g_r_t = None
         pbar = ProgressBar()
