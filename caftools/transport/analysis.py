@@ -432,14 +432,14 @@ def vhf(atom1,atom2,temp=298,stride=100):
             t = trj.time[:chunk_length+1]
             t_save = t - t[0]
             
-            '''
+            
             print('len of grt: {}'.format(len(g_r_t)))
             plt.plot(r,g_r_t)
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
             print(r)
             print(g_r_t)
-            '''
+            
             
     '''   
     fig,ax = plt.subplots()
