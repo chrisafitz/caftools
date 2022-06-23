@@ -248,7 +248,7 @@ def density():
                     "water": 18.01528
                 }  # g/mol
     
-    rho = md.density(trj,masses = MW)
+    rho = md.density(trj,masses = None)
     
     fig, ax = plt.subplots()
     plt.plot(rho)
