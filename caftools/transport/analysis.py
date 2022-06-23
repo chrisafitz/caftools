@@ -381,7 +381,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
     
     #temp = job.statepoint()["temperature"]
     #case = job.statepoint()["case"]
-    radius = 1.2 #job.statepoint()["r"]
+    radius = 1 #job.statepoint()["r"]
     print("loaded trajectory")
     #dt = get_dt(trj)
     tot_time = trj.n_frames*trj.timestep
