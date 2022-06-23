@@ -369,6 +369,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             if g_r_t is None:
                 g_r_t = np.zeros_like(g_r_t_frame)
             g_r_t += g_r_t_frame
+            print(g_r_t)
 
         return r, g_r_t
     
@@ -422,7 +423,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             val2 = (selections[pair[1]])
             print(val1,val2)
             start_time=time.time()
-            print(f"{pair[0]}{pair[1]} pvhf calc starting now...")
+            print(f"{pair[0]}-{pair[1]} pvhf calc starting now...")
             r, g_r_t = compute_partial_van_hove(trj,chunk_length = chunk_length, selection1 = val1,selection2 = val2, self_correlation = False, r_range=(0,r_max))
             t = trj.time[:chunk_length+1]
             t_save = t - t[0]
@@ -431,11 +432,11 @@ def vhf(atom1,atom2,temp=298,stride=100):
             print(g_r_t)
 
             
-            
-            fig,ax = plt.subplots()
-            plt.plot(r,g_r_t)
-            plt.xlabel('distance (nm)')
-            plt.ylabel('g (r,t)')
+    '''   
+    fig,ax = plt.subplots()
+    plt.plot(r,g_r_t)
+    plt.xlabel('distance (nm)')
+    plt.ylabel('g (r,t)')
     
     
     name1 = atom1.split()
@@ -445,9 +446,9 @@ def vhf(atom1,atom2,temp=298,stride=100):
     fig.suptitle('VHF {} - {}'.format(atom1_title,atom2_title))
     plt.savefig('vhf {} - {}.pdf'.format(atom1_title,atom2_title))
     print('done')
+     '''            
             
-            
-    '''
+    
     #saving to .txt file
     np.savetxt(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"),g_r_t, header = "# Van Hove Function, dt: {} fs, dr: {}".format(dt, np.unique(np.round(np.diff(trj.time), 6))[0]),)
     np.savetxt(os.path.join(job.workspace(),f"r_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), r, header="# Positions" )
@@ -485,4 +486,3 @@ def vhf(atom1,atom2,temp=298,stride=100):
     ax.legend(labels)
     plt.savefig(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.pdf"))
 
-    '''
