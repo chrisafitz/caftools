@@ -429,6 +429,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
         
         print(r)
         print(g_r_t)
+        
         '''
         #saving to .txt file
         np.savetxt(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"),g_r_t, header = "# Van Hove Function, dt: {} fs, dr: {}".format(dt, np.unique(np.round(np.diff(trj.time), 6))[0]),)
