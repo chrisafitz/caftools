@@ -392,14 +392,15 @@ def vhf(atom1,atom2,temp=298,stride=100):
         selections['cation'] = trj.topology.select(atom1)
     elif 'tfsi' in atom1:
         selections['anion'] = trj.topology.select(atom1)
-    elif 'acn' in atom1 or 'water' in atom1:
+    elif 'acn' in atom1 or 'wat' in atom1:
         selections['solvent'] = trj.topology.select(atom1)
     if 'li' in atom2 or 'emim' in atom2 or 'bmim' in atom2:
         selections['cation'] = trj.topology.select(atom2)
     elif 'tfsi' in atom2:
         selections['anion'] = trj.topology.select(atom2)
-    elif 'acn' in atom2 or 'water' in atom2:
+    elif 'acn' in atom2 or 'wat' in atom2:
         selections['solvent'] = trj.topology.select(atom2)
+
     
 
     combos = combinations(list(selections.keys()),2)
