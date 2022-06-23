@@ -263,7 +263,7 @@ def density():
     
 
 ### Van Hove Function
-def vhf(atom1,atom2,temp=298,stride=100):
+def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
     
     def compute_partial_van_hove(
         trj,
@@ -430,7 +430,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             t_save = t - t[0]
             
             fig,ax = plt.subplots()
-            numplots = 3
+            numplots = numplots
             frames = []
             for ii in range(numplots):
                 frame = ii * ((g_r_t.shape[0])//(numplots-1) - 1)
