@@ -13,7 +13,7 @@ import unyt as u
 from scipy import stats
 from mtools.post_process import calc_density
 import time
-from scattering.utils.utils import get_dt, get_unique_atoms
+#from scattering.utils.utils import get_dt, get_unique_atoms
 from progressbar import ProgressBar
 
 current_path = os.getcwd()
@@ -317,7 +317,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             )
 
         # Don't need to store it, but this serves to check that dt is constant
-        dt = get_dt(trj)
+        #dt = get_dt(trj)
 
         pairs = trj.top.select_pairs(selection1=selection1, selection2=selection2)
         if self_correlation == "self":
@@ -380,7 +380,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
     #case = job.statepoint()["case"]
     radius = 1.2 #job.statepoint()["r"]
     print("loaded trajectory")
-    dt = get_dt(trj)
+    #dt = get_dt(trj)
     tot_time = trj.n_frames*trj.timestep
     topology = trj.topology
    
