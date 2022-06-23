@@ -249,18 +249,22 @@ def density():
                 }  # g/mol
     
     rho = md.density(trj)
+    rho2 = calc_density(trj)
     
     fig, ax = plt.subplots()
     plt.plot(rho)
+    plt.plot(rho2)
     plt.xlabel('time (ns)')
-    plt.ylabel('desnity (kg/m^3)')
+    plt.ylabel('density (kg/m^3)')
+    
+    '''
     currfol = os.getcwd()
     split_currfol = currfol.split('/')
     currfol_name = split_currfol[-1]
     fig.suptitle('{} Density Profile'.format(currfol_name))
     plt.savefig('density profile {}.pdf'.format(currfol_name))
     print('done')
-    
+    '''
 
 ### Van Hove Function
 def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
