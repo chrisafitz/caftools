@@ -249,7 +249,7 @@ def density():
                 }  # g/mol
     
     rho = md.density(trj,masses = None)
-    
+    print(rho.shape)
     fig, ax = plt.subplots()
     plt.plot(rho)
     plt.xlabel('time (ns)')
