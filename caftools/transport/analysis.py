@@ -14,8 +14,8 @@ from scipy import stats
 from mtools.post_process import calc_density
 import time
 #from scattering.utils.utils import get_dt, get_unique_atoms
-#from progressbar import ProgressBar
-import progressbar as ProgressBar
+from progressbar import ProgressBar
+
 
 
 current_path = os.getcwd()
