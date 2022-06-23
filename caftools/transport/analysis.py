@@ -441,7 +441,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             atom1_title = '{}({})'.format(name1[1],name1[-1])
             name2 = atom2.split()
             atom2_title = '{}({})'.format(name2[1],name2[-1])
-            ax.legend()
+            plt.legend()
             fig.suptitle('VHF {} - {}'.format(atom1_title,atom2_title))
             
             
