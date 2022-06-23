@@ -433,6 +433,7 @@ def vhf(atom1,atom2,temp=298,stride=100):
             
             print(r.shape)
             print(g_r_t.shape)
+            print(g_r_t.shape[0])
             
             '''
             print('len of grt: {}'.format(len(g_r_t)))
