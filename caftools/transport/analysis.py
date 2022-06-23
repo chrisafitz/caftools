@@ -15,6 +15,7 @@ from mtools.post_process import calc_density
 import time
 #from scattering.utils.utils import get_dt, get_unique_atoms
 from progressbar import ProgressBar
+import warnings
 
 
 
@@ -403,15 +404,6 @@ def vhf(atom1,atom2,temp=298,stride=100):
 
     combos = combinations(list(selections.keys()),2)
    
-    for combo in combos:
-        if len(selections[combo[0]]) != 0 and len(selections[combo[1]]) != 0:
-            fig, ax = plt.subplots()
-            print('running vhf between {0} ({1}) \tand\t{2} ({3})\t...'.format(combo[0],
-                                                                        len(selections[combo[0]]),
-                                                                        combo[1],
-                                                                        len(selections[combo[1]])))
-            print(combo)
-   
     chunk_length = 200 # frames, 10 fs output
     cpu_count = 32
     n_chunks = 2000 # make higher if more averaging needed for smoother curves
@@ -419,56 +411,61 @@ def vhf(atom1,atom2,temp=298,stride=100):
     #Define chunk start frames
     chunk_starts = np.linspace(0, trj.n_frames-chunk_length, n_chunks, dtype=int)
     start=time.time()
-    for pair in combinations:
-        val1 = (selections[pair[0]])
-        val2 = (selections[pair[1]])
-        print(val1,val2)
-        start_time=time.time()
-        print(f"{pair[0]}{pair[1]} pvhf calc starting now...")
-        r, g_r_t = compute_partial_van_hove(trj,chunk_length = chunk_length, selection1 = val1,selection2 = val2, self_correlation = False, r_range=(0,r_max))
-        t = trj.time[:chunk_length+1]
-        t_save = t - t[0]
+    for pair in combos:
+        if len(selections[pair[0]]) != 0 and len(selections[pair[1]]) != 0:
+            print('running vhf between {0} ({1}) \tand\t{2} ({3})\t...'.format(pair[0],
+                                                                        len(selections[pair[0]]),
+                                                                        pair[1],
+                                                                        len(selections[pair[1]])))
+            val1 = (selections[pair[0]])
+            val2 = (selections[pair[1]])
+            print(val1,val2)
+            start_time=time.time()
+            print(f"{pair[0]}{pair[1]} pvhf calc starting now...")
+            r, g_r_t = compute_partial_van_hove(trj,chunk_length = chunk_length, selection1 = val1,selection2 = val2, self_correlation = False, r_range=(0,r_max))
+            t = trj.time[:chunk_length+1]
+            t_save = t - t[0]
+            
+            print(r)
+            print(g_r_t)
         
-        print(r)
-        print(g_r_t)
-        
-        '''
-        #saving to .txt file
-        np.savetxt(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"),g_r_t, header = "# Van Hove Function, dt: {} fs, dr: {}".format(dt, np.unique(np.round(np.diff(trj.time), 6))[0]),)
-        np.savetxt(os.path.join(job.workspace(),f"r_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), r, header="# Positions" )
-        np.savetxt(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), t_save, header="# Time")
-        end_time = time.time()
-        print(f"total time for {pair[0]}{pair[1]} pair was {(end_time - start_time)/60} minutes")
-        end = time.time()
-        print(f"total time for {n_chunks} loops is: {(end-start)/60} minutes")
-        df_vh = pd.read_csv(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), sep=" ", skiprows = 1,header=None)
-        df_vh = df_vh.apply(pd.to_numeric, errors='coerce')
-        header_list = ["r"]
-        df_r = pd.read_csv(os.path.join(job.workspace(),f"r_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), sep=" ", skiprows = 1,header=None,names=header_list)
-        header_list = ["time"]
-        df_t = pd.read_csv(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), sep=" ",skiprows = 1,header=None,names=header_list)
-        df1_vh = df_vh
-        df_concat = pd.concat([df_t,df_r, df1_vh], axis=1)
-        index_list = [0,int((df_concat.shape[0])/3),int((df_concat.shape[0])/2), int((df_concat.shape[0]-1))]
-        color_list = [x/max(index_list) for x in index_list]
-        labels = []
-        
-        
-        fig, ax = plt.subplots()
-        for x in index_list:
-            index = index_list.index(x)
-            color_val = color_list[index]
-            b=df_concat.iloc[x,2:]
-            a = df_concat.iloc[:,1]
-            h = (df_concat.iloc[x,0]) *100
-            data = pd.DataFrame({'r':a, 'Vh(r)':b})
-            c = sns.color_palette("hls", 8)
-            ax = sns.lineplot(data = data, x="r", y="Vh(r)", color=c[index],legend = False)
-            ax.set_title("{}-{}".format(pair[0], pair[1]))
-            text = '{}-ps'.format(str(h))
-            labels.append(text)
-        ax.legend(labels)
-        plt.savefig(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.pdf"))
+            '''
+            #saving to .txt file
+            np.savetxt(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"),g_r_t, header = "# Van Hove Function, dt: {} fs, dr: {}".format(dt, np.unique(np.round(np.diff(trj.time), 6))[0]),)
+            np.savetxt(os.path.join(job.workspace(),f"r_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), r, header="# Positions" )
+            np.savetxt(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), t_save, header="# Time")
+            end_time = time.time()
+            print(f"total time for {pair[0]}{pair[1]} pair was {(end_time - start_time)/60} minutes")
+            end = time.time()
+            print(f"total time for {n_chunks} loops is: {(end-start)/60} minutes")
+            df_vh = pd.read_csv(os.path.join(job.workspace(),f"pvhf_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), sep=" ", skiprows = 1,header=None)
+            df_vh = df_vh.apply(pd.to_numeric, errors='coerce')
+            header_list = ["r"]
+            df_r = pd.read_csv(os.path.join(job.workspace(),f"r_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), sep=" ", skiprows = 1,header=None,names=header_list)
+            header_list = ["time"]
+            df_t = pd.read_csv(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.txt"), sep=" ",skiprows = 1,header=None,names=header_list)
+            df1_vh = df_vh
+            df_concat = pd.concat([df_t,df_r, df1_vh], axis=1)
+            index_list = [0,int((df_concat.shape[0])/3),int((df_concat.shape[0])/2), int((df_concat.shape[0]-1))]
+            color_list = [x/max(index_list) for x in index_list]
+            labels = []
+            
+            
+            fig, ax = plt.subplots()
+            for x in index_list:
+                index = index_list.index(x)
+                color_val = color_list[index]
+                b=df_concat.iloc[x,2:]
+                a = df_concat.iloc[:,1]
+                h = (df_concat.iloc[x,0]) *100
+                data = pd.DataFrame({'r':a, 'Vh(r)':b})
+                c = sns.color_palette("hls", 8)
+                ax = sns.lineplot(data = data, x="r", y="Vh(r)", color=c[index],legend = False)
+                ax.set_title("{}-{}".format(pair[0], pair[1]))
+                text = '{}-ps'.format(str(h))
+                labels.append(text)
+            ax.legend(labels)
+            plt.savefig(os.path.join(job.workspace(),f"t_{pair[0]}{pair[1]}_{r_max}nm_{n_chunks}chunks_{temp}_distinct.pdf"))
 
-        '''
+            '''
     
