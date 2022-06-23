@@ -430,9 +430,11 @@ def vhf(atom1,atom2,temp=298,stride=100):
             t_save = t - t[0]
             
             fig,ax = plt.subplots()
-            for ii in range(g_r_t.shape[0]):
-                if ii == 0 or ii == g_r_t.shape[0]/2 or ii == g_r_t.shape[0]:
-                    plt.plot(r,g_r_t[ii])
+            numplots = 3
+            for ii in range(numplots):
+                frame = ii * (g_r_t.shape[0]/numplots)
+                plt.plot(r,g_r_t[frame])
+
             plt.xlabel('distance (nm)')
             plt.ylabel('g (r,t)')
             name1 = atom1.split()
