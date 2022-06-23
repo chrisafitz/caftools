@@ -368,8 +368,12 @@ def vhf(atom1,atom2,temp=298,stride=100):
 
             if g_r_t is None:
                 g_r_t = np.zeros_like(g_r_t_frame)
-            g_r_t += g_r_t_frame
-            print(type(g_r_t))
+            fig,ax = plt.subplots()
+            plt.plot(r,g_r_t)
+            plt.xlabel('distance (nm)')
+            plt.ylabel('g (r,t)')
+            # g_r_t += g_r_t_frame
+            
 
         return r, g_r_t
     
