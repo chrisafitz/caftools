@@ -271,7 +271,7 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
     dens_l = []
     for l in my_l:
         ln = index_in[l]
-        print(index_in.index(ln))
+        #print(index_in.index(ln))
         points1 =np.vstack(ln)
         tree = ss.cKDTree(points1)
         lo = []
