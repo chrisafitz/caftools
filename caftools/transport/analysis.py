@@ -287,7 +287,21 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
     return dens_l
 
 ### Density
-def density(molecule, cutoff = 0.20):
+def density(molecule):
+    
+    def tuning_cutoff(index,my_l,pmol):
+        cutoffs = []
+        rhos = []
+        cutoff = 0.05
+        while cutoff <= 0.35:
+            vol = 4/3*np.pi* (cutoff**3)
+            dens_l = kdtree(index, cutoff, vol, my_l, pmol)
+            average = ([np.mean(np.array(x)) for x in dens_l])
+            avg = round(np.mean(np.array(average)), 2)
+            cutoffs.append(cutoff)
+            rhos.append(avg)
+            cutoff += 0.01
+        return rhos,cutoffs
     
     print('loading trj')
     top_file = ('com.gro')
@@ -341,7 +355,7 @@ def density(molecule, cutoff = 0.20):
     
     
     
-    cutoff = 0.2
+    cutoff = cutoff_list[minimum_val]
     vol = 4/3*np.pi* (cutoff**3)
     time = trj.time
     time_list = [time[x] for x in my_list]
@@ -353,22 +367,9 @@ def density(molecule, cutoff = 0.20):
     avg = round(np.mean(np.array(average)), 2)
     std = round(np.std(np.array(average)), 1)
     
-    return avg
+    print('The density is: {} +- {} kg/m^3'.format(avg,std))
 
-def tuning_cutoff(index,my_l,pmol):
-    cutoffs = []
-    rhos = []
-    cutoff = 0.15
 
-    while cutoff <= 0.30:
-        vol = 4/3*np.pi* (cutoff**3)
-        dens_l = kdtree(index, cutoff, vol, my_l, pmol)
-        average = ([np.mean(np.array(x)) for x in dens_l])
-        avg = round(np.mean(np.array(average)), 2)
-        cutoffs.append(cutoff)
-        rhos.append(avg)
-        cutoff += 0.01
-    return rhos,cutoffs
     
 
 
