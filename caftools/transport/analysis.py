@@ -273,7 +273,6 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
         ln = index_in[l]
         print(index_in.index(ln))
         points1 =np.vstack(ln)
-        print(points1)
         tree = ss.cKDTree(points1)
         lo = []
         for p in ln:
@@ -315,9 +314,7 @@ def density(molecule, cutoff = 0.20):
     
     
     frames_ = trj.atom_slice(trj.topology.select(selections[molecule]))
-    print(frames_)
     array_frames = np.arange(frames_.n_frames)
-    print(array_frames)
     pmol = weight[molecule]
     #pmol = pmol/2
     index = []
