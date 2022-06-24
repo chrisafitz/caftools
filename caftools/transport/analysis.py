@@ -272,7 +272,8 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
     for l in my_l:
         ln = index_in[l]
         print(index_in.index(ln))
-        points1 =np.vstack(ln)
+        np_array = np.array(ln, dtype=int)
+        points1 =np.vstack(np_array)
         tree = ss.cKDTree(points1)
         lo = []
         for p in ln:
