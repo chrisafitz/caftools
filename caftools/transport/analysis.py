@@ -335,6 +335,8 @@ def density(molecule, cutoff = 0.20):
     plt.xlabel('Cutoff Value (nm)')
     plt.ylabel('Density (kg/m^3)')
     plt.show()
+    minimum_val = threshold.index(min(threshold))
+    print(cutoff[minimum_val])
     
     
     
