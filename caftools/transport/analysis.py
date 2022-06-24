@@ -282,7 +282,7 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
             dens = (((len(elements)/vol)*pmol)/((1*(10**-9)**3)*(6.022*(10**23))))*(1/1000)
             lo.append(dens)
         arr = np.array(lo)
-        print(np.mean(arr))
+        #print(np.mean(arr))
         dens_l.append(lo)
     return dens_l
 
