@@ -265,29 +265,29 @@ def dcensity():
     print('done')
     '''
 
-### KD Tree
-def kdtree(index_in, cutoff, vol, my_l, pmol):
-    # build the KDTree using the *larger* points array
-    dens_l = []
-    for l in my_l:
-        ln = index_in[l]
-        #print(index_in.index(ln))
-        points1 =np.vstack(ln)
-        tree = ss.cKDTree(points1)
-        lo = []
-        for p in ln:
-            points2 = np.array(p)
-            groups = tree.query_ball_point(points2, cutoff)
-            elements = list(tree.data[groups])
-            dens = (((len(elements)/vol)*pmol)/((1*(10**-9)**3)*(6.022*(10**23))))*(1/1000)
-            lo.append(dens)
-        arr = np.array(lo)
-        #print(np.mean(arr))
-        dens_l.append(lo)
-    return dens_l
 
 ### Density
 def density(molecule):
+    
+    def kdtree(index_in, cutoff, vol, my_l, pmol):
+        # build the KDTree using the *larger* points array
+        dens_l = []
+        for l in my_l:
+            ln = index_in[l]
+            #print(index_in.index(ln))
+            points1 =np.vstack(ln)
+            tree = ss.cKDTree(points1)
+            lo = []
+            for p in ln:
+                points2 = np.array(p)
+                groups = tree.query_ball_point(points2, cutoff)
+                elements = list(tree.data[groups])
+                dens = (((len(elements)/vol)*pmol)/((1*(10**-9)**3)*(6.022*(10**23))))*(1/1000)
+                lo.append(dens)
+            arr = np.array(lo)
+            #print(np.mean(arr))
+            dens_l.append(lo)
+        return dens_l
     
     def tuning_cutoff(index,my_l,pmol):
         cutoffs = []
@@ -371,10 +371,6 @@ def density(molecule):
 
 
     
-
-
-
-
 
 ### Van Hove Function
 def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
