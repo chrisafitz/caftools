@@ -314,7 +314,7 @@ def density():
                 }
     
     frames_ = trj.atom_slice(trj.top.select(selections['water']))
-    array_frames = np.arange(0,frames_.n_frames)
+    array_frames = np.arange(frames_.n_frames)
     index = []
     for elem in array_frames:
         frames_[elem]
@@ -336,6 +336,11 @@ def density():
     print("First done...")
 
 
+    average = ([np.mean(np.array(x)) for x in dens_l])
+    avg = round(np.mean(np.array(average)), 2)
+    std = round(np.std(np.array(average)), 1)
+    
+    print(avg)
 
 
 
