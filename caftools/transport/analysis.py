@@ -287,7 +287,7 @@ def density(molecule):
                 'bmim': 'resname bmim',
                 'emim': 'resname emim',
                 'wat': 'resname wat',
-                'tfsi': 'resname tfsi',
+                'tfsi': 'all',
                 'acn': 'resname acn'
                 }
     
