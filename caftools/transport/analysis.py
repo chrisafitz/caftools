@@ -337,6 +337,7 @@ def density(molecule, cutoff = 0.20):
     plt.show()
     minimum_val = threshold.index(min(threshold))
     print(cutoff_list[minimum_val])
+    print(threshold[minimum_val])
     
     
     
