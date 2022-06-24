@@ -230,40 +230,6 @@ def neconductivity(ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion a
     print("The Nernst-Einstein conductivity is: "+ str(conductivity))
     with open("NE_Conductivity.txt","w") as file:
         file.write("The Nernst-Einstein conductivity is: "+ str(conductivity))
-        
-### Density
-def dcensity():
-    
-    print('loading trj')
-    top_file = ('com.gro')
-    trj_file = ('sample_com_unwrapped.xtc')
-    trj = md.load(trj_file, top=top_file)
-    
-    MW = {
-                    "acn": 41.05,
-                    "li_tfsi": 287.09,
-                    "emim_tfsi": 391.31,
-                    "bmim_tfsi": 419.36,
-                    "hmim_tfsi": 447.4,
-                    "omim_tfsi":475.4,
-                    "water": 18.01528
-                }  # g/mol
-    
-    rho = md.density(trj,masses = None)
-    print(rho.shape)
-    fig, ax = plt.subplots()
-    plt.plot(rho)
-    plt.xlabel('time (ns)')
-    plt.ylabel('density (kg/m^3)')
-    
-    '''
-    currfol = os.getcwd()
-    split_currfol = currfol.split('/')
-    currfol_name = split_currfol[-1]
-    fig.suptitle('{} Density Profile'.format(currfol_name))
-    plt.savefig('density profile {}.pdf'.format(currfol_name))
-    print('done')
-    '''
 
 
 ### Density
@@ -342,7 +308,7 @@ def density(molecule):
     stride = 100
     my_list = [*range(0, len(index), stride)]
     my_l = [int(x) for x in my_list]
-    threshold,cutoff_list = tuning_cutoff(index,my_l,pmol)
+    threshold, cutoff_list = tuning_cutoff(index,my_l,pmol)
     fig,ax = plt.subplots()
     plt.plot(cutoff_list,threshold)
     plt.xlabel('Cutoff Value (nm)')
