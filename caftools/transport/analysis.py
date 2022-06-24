@@ -305,25 +305,34 @@ def density():
             }  # g/mol
     
     selections = {
-                'li': trj.top.select("resname li"),
-                'tfsi': trj.top.select("resname tfsi"),
-                'water': trj.top.select("resname water"),
-                'emim': trj.top.select("resname emim"),
-                'bmim': trj.top.select("resname bmim")
+                'li': 'resname li',
+                'bmim': 'resname bmim',
+                'emim': 'resname emim',
+                'water': 'resname water',
+                'tfsi': 'resname tfsi',
+                'acn': 'resname acn'
                 }
     
-    sliced = trj.atom_slice(trj.top.select('resname water'))
+    frames_ = trj.atom_slice(trj.top.select(selections['water']))
+    array_frames = np.arange(0,frames_.n_frames)
+    index = []
+    for elem in array_frames:
+        frames_[elem]
+        l = []
+        for particle in frames_[elem]:
+            l.append(particle)
+        index.append(l)
     print("Sliced selection in pore!")
     
     
     cutoff = 0.2
     vol = 4/3*np.pi* (cutoff**3)
     stride = 100
-    my_list = [*range(0, len(sliced), stride)]
+    my_list = [*range(0, len(index), stride)]
     my_l = [int(x) for x in my_list]
     time = trj.time
     time_list = [time[x] for x in my_list]
-    dens_l = kdtree(sliced, cutoff, vol, my_l, pmol)
+    dens_l = kdtree(index, cutoff, vol, my_l, pmol)
     print("First done...")
 
 
