@@ -292,7 +292,7 @@ def density():
     print('loading trj')
     top_file = ('com.gro')
     trj_file = ('sample_com_unwrapped.xtc')
-    trj = md.load(trj_file, top=top_file,stride = 1000)
+    trj = md.load(trj_file, top=top_file,stride = 500)
     weight = {
                 "acn": 41.05,
                 "li_tfsi": 287.09,
@@ -313,7 +313,7 @@ def density():
                 }
     
     
-    frames_ = trj.atom_slice(trj.topology.select('resname wat and name O'))
+    frames_ = trj.atom_slice(trj.topology.select('resname wat'))
     print(frames_)
     array_frames = np.arange(frames_.n_frames)
     pmol = weight['wat']
