@@ -309,12 +309,11 @@ def density(molecule):
     trj = md.load(trj_file, top=top_file,stride = 500)
     weight = {
                 "acn": 41.05,
-                "li_tfsi": 287.09,
-                "emim_tfsi": 391.31,
-                "bmim_tfsi": 419.36,
-                "hmim_tfsi": 447.4,
-                "omim_tfsi":475.4,
-                "wat": 18.01528
+                "wat": 18.01528,
+                'tfsi': 280.149,
+                'li': 6.941,
+                'emim': 111.17,
+                'bmim': 139.21
             }  # g/mol
     
     selections = {
