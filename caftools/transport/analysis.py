@@ -301,23 +301,23 @@ def density():
                 "bmim_tfsi": 419.36,
                 "hmim_tfsi": 447.4,
                 "omim_tfsi":475.4,
-                "water": 18.01528
+                "wat": 18.01528
             }  # g/mol
     
     selections = {
                 'li': 'resname li',
                 'bmim': 'resname bmim',
                 'emim': 'resname emim',
-                'water': 'resname water',
+                'wat': 'resname wat',
                 'tfsi': 'resname tfsi',
                 'acn': 'resname acn'
                 }
     
     
-    frames_ = trj.atom_slice(trj.topology.select('resname water'))
+    frames_ = trj.atom_slice(trj.topology.select('resname wat'))
     print(frames_)
-    array_frames = np.linspace(0,frames_.n_frames,frames_.n_frames)
-    pmol = weight['water']
+    array_frames = np.arange(frames_.n_frames)
+    pmol = weight['wat']
     index = []
     for elem in array_frames:
         frames_[elem]
