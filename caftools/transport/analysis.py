@@ -355,7 +355,7 @@ def density(molecule, cutoff = 0.20):
 def tuning_cutoff(index,my_l,pmol):
     cutoffs = []
     rhos = []
-    cutoff = 0.25
+    cutoff = 0.15
 
     while cutoff <= 0.30:
         vol = 4/3*np.pi* (cutoff**3)
