@@ -258,7 +258,7 @@ def density(molecule):
     def tuning_cutoff(index,my_l,pmol):
         cutoffs = []
         rhos = []
-        cutoff = 0.05
+        cutoff = 1
         while cutoff <= 5:
             vol = 4/3*np.pi* ((cutoff+0.025)**3)
             dens_l = kdtree(index, cutoff, vol, my_l, pmol)
