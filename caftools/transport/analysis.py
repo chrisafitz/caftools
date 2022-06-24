@@ -275,7 +275,6 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
         points1 =np.vstack(ln)
         print(points1)
         tree = ss.cKDTree(points1)
-        print(tree)
         lo = []
         for p in ln:
             points2 = np.array(p)
@@ -340,7 +339,8 @@ def density():
     dens_l = kdtree(index, cutoff, vol, my_l, pmol)
     print("First done...")
 
-
+    print(dens_l.shape)
+    print(dens_l)
     average = ([np.mean(np.array(x)) for x in dens_l])
     avg = round(np.mean(np.array(average)), 2)
     std = round(np.std(np.array(average)), 1)
