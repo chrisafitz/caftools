@@ -339,7 +339,7 @@ def density():
     dens_l = kdtree(index, cutoff, vol, my_l, pmol)
     print("First done...")
 
-    print(type(dens_l))
+    print(len(dens_l))
     print(dens_l)
     average = ([np.mean(np.array(x)) for x in dens_l])
     avg = round(np.mean(np.array(average)), 2)
