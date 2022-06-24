@@ -346,7 +346,7 @@ def density(molecule, cutoff = 0.20):
     avg = round(np.mean(np.array(average)), 2)
     std = round(np.std(np.array(average)), 1)
     
-    print(avg)
+    return avg
 
 def tuning_cutoff():
     cutoffs = []
