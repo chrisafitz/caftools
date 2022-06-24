@@ -347,6 +347,7 @@ def density(molecule):
     plt.plot(cutoff_list,threshold)
     plt.xlabel('Cutoff Value (nm)')
     plt.ylabel('Density (kg/m^3)')
+    fig.suptitle('K-D Tree Optimization of the Cut-Off Value')
     plt.show()
     minimum_val = threshold.index(min(threshold))
     print(cutoff_list[minimum_val])
