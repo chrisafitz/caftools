@@ -294,7 +294,7 @@ def density():
     trj_file = ('sample_com_unwrapped.xtc')
     trj = md.load(trj_file, top=top_file)
     
-    MW = {
+    weight = {
                 "acn": 41.05,
                 "li_tfsi": 287.09,
                 "emim_tfsi": 391.31,
@@ -315,7 +315,7 @@ def density():
     
     frames_ = trj.atom_slice(trj.topology.select(selections['water']))
     array_frames = np.arange(frames_.n_frames)
-    pmol = MW['water']
+    pmol = weight['water']
     index = []
     for elem in array_frames:
         frames_[elem]
