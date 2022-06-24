@@ -290,10 +290,9 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
 def density():
     
     print('loading trj')
-    top_file = ('sample.gro')
-    trj_file = ('sample_whole.xtc')
+    top_file = ('com.gro')
+    trj_file = ('sample_com_unwrapped.xtc')
     trj = md.load(trj_file, top=top_file,stride = 1000)
-    
     weight = {
                 "acn": 41.05,
                 "li_tfsi": 287.09,
