@@ -16,6 +16,7 @@ import time
 #from scattering.utils.utils import get_dt, get_unique_atoms
 from progressbar import ProgressBar
 import warnings
+import scipy.spatial as ss
 
 
 
@@ -231,7 +232,7 @@ def neconductivity(ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion a
         file.write("The Nernst-Einstein conductivity is: "+ str(conductivity))
         
 ### Density
-def density():
+def dcensity():
     
     print('loading trj')
     top_file = ('com.gro')
@@ -263,6 +264,75 @@ def density():
     plt.savefig('density profile {}.pdf'.format(currfol_name))
     print('done')
     '''
+
+### KD Tree
+def kdtree(index_in, cutoff, vol, my_l, pmol):
+    # build the KDTree using the *larger* points array
+    dens_l = []
+    for l in my_l:
+        ln = index_in[l]
+        print(index_in.index(ln))
+        points1 =np.vstack(ln)
+        tree = ss.cKDTree(points1)
+        lo = []
+        for p in ln:
+            points2 = np.array(p)
+            groups = tree.query_ball_point(points2, cutoff)
+            elements = list(tree.data[groups])
+            dens = (((len(elements)/vol)*pmol)/((1*(10**-9)**3)*(6.022*(10**23))))*(1/1000)
+            lo.append(dens)
+        arr = np.array(lo)
+        print(np.mean(arr))
+        dens_l.append(lo)
+    return dens_l
+
+### Density
+def density():
+    
+    print('loading trj')
+    top_file = ('com.gro')
+    trj_file = ('sample_com_unwrapped.xtc')
+    trj = md.load(trj_file, top=top_file)
+    
+    pmol = {
+                "acn": 41.05,
+                "li_tfsi": 287.09,
+                "emim_tfsi": 391.31,
+                "bmim_tfsi": 419.36,
+                "hmim_tfsi": 447.4,
+                "omim_tfsi":475.4,
+                "water": 18.01528
+            }  # g/mol
+    
+    selections = {
+                'li': trj.top.select("resname li"),
+                'tfsi': trj.top.select("resname tfsi"),
+                'water': trj.top.select("resname water"),
+                'emim': trj.top.select("resname emim"),
+                'bmim': trj.top.select("resname bmim")
+                }
+    
+    sliced = trj.atom_slice(trj.top.select('resname water'))
+    print("Sliced selection in pore!")
+    
+    
+    cutoff = 0.2
+    vol = 4/3*np.pi* (cutoff**3)
+    stride = 100
+    my_list = [*range(0, len(sliced), stride)]
+    my_l = [int(x) for x in my_list]
+    time = trj.time
+    time_list = [time[x] for x in my_list]
+    dens_l = kdtree(sliced, cutoff, vol, my_l, pmol)
+    print("First done...")
+
+
+
+
+
+
+
+
 
 ### Van Hove Function
 def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
