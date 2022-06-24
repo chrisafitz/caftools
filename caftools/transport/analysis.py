@@ -290,8 +290,8 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
 def density():
     
     print('loading trj')
-    top_file = ('com.gro')
-    trj_file = ('sample_com_unwrapped.xtc')
+    top_file = ('sample.gro')
+    trj_file = ('sample_whole.xtc')
     trj = md.load(trj_file, top=top_file,stride = 1000)
     
     weight = {
@@ -314,7 +314,7 @@ def density():
                 }
     
     
-    frames_ = trj.atom_slice(trj.topology.select('resname wat'))
+    frames_ = trj.atom_slice(trj.topology.select('resname wat and name O'))
     print(frames_)
     array_frames = np.arange(frames_.n_frames)
     pmol = weight['wat']
@@ -328,7 +328,7 @@ def density():
     print("Sliced selection in pore!")
     
     
-    cutoff = 0.075
+    cutoff = 0.2
     vol = 4/3*np.pi* (cutoff**3)
     stride = 100
     my_list = [*range(0, len(index), stride)]
