@@ -318,7 +318,8 @@ def density():
     print(frames_)
     array_frames = np.arange(frames_.n_frames)
     print(array_frames)
-    pmol = weight['tfsi']
+    pmol = weight['li_tfsi']
+    pmol = pmol/2
     index = []
     for elem in array_frames:
         w =frames_[elem]
