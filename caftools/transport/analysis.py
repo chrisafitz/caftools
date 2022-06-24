@@ -326,38 +326,46 @@ def density(molecule, cutoff = 0.20):
         index.append(l)
     print("Sliced selection in pore!")
     
-    
-    cutoff = 0.2
-    vol = 4/3*np.pi* (cutoff**3)
     stride = 100
     my_list = [*range(0, len(index), stride)]
     my_l = [int(x) for x in my_list]
+    threshold,cutoff_list = tuning_cutoff(index,my_l,pmol)
+    fig,ax = plt.subplots()
+    plt.plot(cutoff_list,threshold)
+    plt.xlabel('Cutoff Value (nm)')
+    plt.ylabel('Density (kg/m^3)')
+    plt.show()
+    
+    
+    
+    cutoff = 0.2
+    vol = 4/3*np.pi* (cutoff**3)
     time = trj.time
     time_list = [time[x] for x in my_list]
     dens_l = kdtree(index, cutoff, vol, my_l, pmol)
     print("First done...")
 
-    print(len(dens_l))
-    print(dens_l)
+
     average = ([np.mean(np.array(x)) for x in dens_l])
     avg = round(np.mean(np.array(average)), 2)
     std = round(np.std(np.array(average)), 1)
     
     return avg
 
-def tuning_cutoff():
+def tuning_cutoff(index,my_l,pmol):
     cutoffs = []
     rhos = []
-    cutoff = 0.05
+    cutoff = 0.01
+
     while cutoff <= 0.35:
-        rho = density('wat',cutoff=cutoff)
+        vol = 4/3*np.pi* (cutoff**3)
+        dens_l = kdtree(index, cutoff, vol, my_l, pmol)
+        average = ([np.mean(np.array(x)) for x in dens_l])
+        avg = round(np.mean(np.array(average)), 2)
         cutoffs.append(cutoff)
-        rhos.append(rho)
+        rhos.append(avg)
         cutoff += 0.01
-    fig,ax = plt.subplots()
-    plt.plot(cutoffs,rhos)
-    plt.xlabel('Cutoff Value (nm)')
-    plt.ylabel('Density (kg/m^3)')
+    return rhos,cutoffs
     
 
 
