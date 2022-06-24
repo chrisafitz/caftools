@@ -272,8 +272,7 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
     for l in my_l:
         ln = index_in[l]
         print(index_in.index(ln))
-        np_array = np.array(ln, dtype=int)
-        points1 =np.vstack(np_array)
+        points1 =np.vstack(ln)
         tree = ss.cKDTree(points1)
         lo = []
         for p in ln:
@@ -293,7 +292,7 @@ def density():
     print('loading trj')
     top_file = ('com.gro')
     trj_file = ('sample_com_unwrapped.xtc')
-    trj = md.load(trj_file, top=top_file)
+    trj = md.load(trj_file, top=top_file,stride = 1000)
     
     weight = {
                 "acn": 41.05,
@@ -321,10 +320,10 @@ def density():
     pmol = weight['wat']
     index = []
     for elem in array_frames:
-        frames_[elem]
+        w =frames_[elem]
         l = []
-        for particle in frames_[elem]:
-            l.append(particle)
+        for particle in (w.xyz)[0]:
+            l.append(particle.tolist())
         index.append(l)
     print("Sliced selection in pore!")
     
