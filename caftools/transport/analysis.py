@@ -314,7 +314,7 @@ def density():
                 }
     
     
-    frames_ = trj.atom_slice(trj.topology.select(selections['water']))
+    frames_ = trj.atom_slice(trj.topology.select('resname water'))
     print(frames_)
     array_frames = np.linspace(0,frames_.n_frames,frames_.n_frames)
     pmol = weight['water']
