@@ -313,7 +313,7 @@ def density():
                 'acn': 'resname acn'
                 }
     
-    frames_ = trj.atom_slice(trj.top.select(selections['water']))
+    frames_ = trj.atom_slice(trj.topology.select(selections['water']))
     array_frames = np.arange(frames_.n_frames)
     index = []
     for elem in array_frames:
