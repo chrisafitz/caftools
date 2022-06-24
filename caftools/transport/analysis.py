@@ -288,7 +288,7 @@ def kdtree(index_in, cutoff, vol, my_l, pmol):
     return dens_l
 
 ### Density
-def density():
+def density(molecule, cutoff = 0.20):
     
     print('loading trj')
     top_file = ('com.gro')
@@ -314,12 +314,12 @@ def density():
                 }
     
     
-    frames_ = trj.atom_slice(trj.topology.select('resname tfsi'))
+    frames_ = trj.atom_slice(trj.topology.select(selections[molecule]))
     print(frames_)
     array_frames = np.arange(frames_.n_frames)
     print(array_frames)
-    pmol = weight['li_tfsi']
-    pmol = pmol/2
+    pmol = weight[molecule]
+    #pmol = pmol/2
     index = []
     for elem in array_frames:
         w =frames_[elem]
@@ -348,7 +348,20 @@ def density():
     
     print(avg)
 
-
+def tuning_cutoff():
+    cutoffs = []
+    rhos = []
+    cutoff = 0.05
+    while cutoff <= 0.35:
+        rho = density('wat',cutoff=cutoff)
+        cutoffs.append(cutoff)
+        rhos.append(rho)
+        cutoff += 0.01
+    fig,ax = plt.subplots()
+    plt.plot(cutoffs,rhos)
+    plt.xlabel('Cutoff Value (nm)')
+    plt.ylabel('Density (kg/m^3)')
+    
 
 
 
