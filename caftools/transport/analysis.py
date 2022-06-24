@@ -259,7 +259,7 @@ def density(molecule):
         cutoffs = []
         rhos = []
         cutoff = 1
-        while cutoff <= 5:
+        while cutoff <= 8:
             vol = 4/3*np.pi* ((cutoff+0.025)**3)
             dens_l = kdtree(index, cutoff, vol, my_l, pmol)
             average = ([np.mean(np.array(x)) for x in dens_l])
