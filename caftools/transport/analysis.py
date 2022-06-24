@@ -328,7 +328,7 @@ def density():
     print("Sliced selection in pore!")
     
     
-    cutoff = 0.05
+    cutoff = 0.075
     vol = 4/3*np.pi* (cutoff**3)
     stride = 100
     my_list = [*range(0, len(index), stride)]
