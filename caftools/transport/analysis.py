@@ -37,6 +37,7 @@ def unwrap():
     def make_comtrj(trj):
         """Takes a trj and returns a trj with COM positions as atoms"""
         print(trj)
+        print(trj.n_residues)
         comtop = md.Topology()
         coords = np.ndarray(shape=(trj.n_frames, trj.n_residues, 3))
         print('coords: {}'.format(coords))
