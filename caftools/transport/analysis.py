@@ -36,16 +36,10 @@ def unwrap():
 
     def make_comtrj(trj):
         """Takes a trj and returns a trj with COM positions as atoms"""
-        print(trj)
-        print(trj.n_residues)
-        print(trj.n_atoms)
+
         comtop = md.Topology()
         coords = np.ndarray(shape=(trj.n_frames, trj.n_residues, 3))
-        print('coords: {}'.format(coords))
-        for j, res in enumerate(trj.topology.atoms):
-            print(j)
-            print(res)
-            
+        for j, res in enumerate(trj.topology.residues):
             comtop.add_atom(res.name, virtual_site, comtop.add_residue(res.name, comtop.add_chain()))
             res_frame = trj.atom_slice([at.index for at in res.atoms])
             coords[:, j, :] = md.compute_center_of_mass(res_frame)
