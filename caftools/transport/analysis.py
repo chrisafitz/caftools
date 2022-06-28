@@ -36,7 +36,7 @@ def unwrap():
 
     def make_comtrj(trj):
         """Takes a trj and returns a trj with COM positions as atoms"""
-
+        print(trj)
         comtop = md.Topology()
         coords = np.ndarray(shape=(trj.n_frames, trj.n_residues, 3))
         print('coords: {}'.format(coords))
@@ -68,10 +68,7 @@ def unwrap():
         
         trj1 = md.load(res_trj, top=gro_file)
         trj2= md.load(unwrapped_trj, top=gro_file)
-        print(trj1)
-        print(trj2)
         comtrj = make_comtrj(trj2)
-        print(comtrj)
         comtrj.save_xtc('sample_com_unwrapped.xtc')
         comtrj[-1].save_gro('comtest.gro')
         print('make whole')
