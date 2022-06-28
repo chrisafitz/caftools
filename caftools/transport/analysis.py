@@ -39,6 +39,7 @@ def unwrap():
 
         comtop = md.Topology()
         coords = np.ndarray(shape=(trj.n_frames, trj.n_residues, 3))
+
         for j, res in enumerate(trj.topology.residues):
             comtop.add_atom(res.name, virtual_site, comtop.add_residue(res.name, comtop.add_chain()))
             res_frame = trj.atom_slice([at.index for at in res.atoms])
