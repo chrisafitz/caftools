@@ -42,7 +42,7 @@ def unwrap():
         comtop = md.Topology()
         coords = np.ndarray(shape=(trj.n_frames, trj.n_residues, 3))
         print('coords: {}'.format(coords))
-        for j, res in enumerate(trj.topology.residues):
+        for j, res in enumerate(trj.topology.atoms):
             print(j)
             print(res)
             
