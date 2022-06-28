@@ -39,14 +39,14 @@ def unwrap():
     if os.path.isfile(xtc_file) and os.path.isfile(gro_file):
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc nojump'.format(xtc_file, 'sample_unwrapped.xtc', tpr_file))
         unwrapped_trj = ('sample_unwrapped.xtc')
-        print(unwrapped_trj)
         
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc res'.format(xtc_file, 'sample_res.xtc', tpr_file))
         res_trj = ('sample_res.xtc')
-        print(res_trj)
         
         trj1 = md.load(res_trj, top=gro_file)
         trj2= md.load(unwrapped_trj, top=gro_file)
+        print(trj1)
+        print(trj2)
         comtrj = make_comtrj(trj2)
         print(comtrj)
         comtrj.save_xtc('sample_com_unwrapped.xtc')
