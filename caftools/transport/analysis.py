@@ -288,8 +288,8 @@ def density(molecule):
     
     
     print('loading trj')
-    top_file = ('com_whole.gro')
-    trj_file = ('sample_com_whole.xtc')
+    top_file = ('sample.gro')
+    trj_file = ('sample_whole.xtc')
     trj = md.load(trj_file, top=top_file,stride = 500)
     weight = {
                 "acn": 41.05,
