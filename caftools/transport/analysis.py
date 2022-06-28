@@ -49,7 +49,7 @@ def unwrap():
         print('make whole')
         
         top_file = (gro_file)
-        trj_file = (res_trj)
+        trj_file = (unwrapped_trj)
         trj = md.load(trj_file,top = top_file,stride = 100)
         com_whole = make_comtrj(trj)
         com_whole[-1].save_gro('com_whole.gro')
