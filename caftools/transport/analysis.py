@@ -39,10 +39,6 @@ def unwrap():
     if os.path.isfile(xtc_file) and os.path.isfile(gro_file):
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc nojump'.format(xtc_file, 'sample_unwrapped.xtc', tpr_file))
         unwrapped_trj = ('sample_unwrapped.xtc')
-    
-        #com_trj = ( 'sample_com.xtc')
-        #unwrapped_com_trj = ('sample_com_unwrapped.xtc')
-    
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc res'.format(xtc_file, 'sample_res.xtc', tpr_file))
         res_trj = ('sample_res.xtc')
         trj = md.load(res_trj, top=gro_file)
@@ -51,10 +47,6 @@ def unwrap():
         comtrj.save_xtc('sample_com_unwrapped.xtc')
         comtrj[-1].save_gro('com.gro')
         print('make whole')
-    
-        #whole_trj =  ('sample_whole.xtc')
-        #whole_com_trj = ('sample_com_whole.xtc')
-    
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc whole'.format(xtc_file,'sample_whole.xtc', gro_file))
         whole_trj =  ('sample_whole.xtc')
         trj_whole = md.load(whole_trj, top=gro_file)
@@ -307,7 +299,7 @@ def density(molecule):
     print(index)
     print(np.shape(index))
     
-    stride = 100
+    stride = 50
     my_list = [*range(0, len(index), stride)]
     my_l = [int(x) for x in my_list]
     threshold, cutoff_list = tuning_cutoff(index,my_l,pmol)
