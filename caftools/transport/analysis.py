@@ -45,7 +45,7 @@ def unwrap():
         trj_2 = md.load(unwrapped_trj, top=gro_file)
         comtrj = make_comtrj(trj_2)
         comtrj.save_xtc('sample_com_unwrapped.xtc')
-        comtrj[-1].save_gro('com.gro')
+        comtrj.save_gro('com.gro')
         print('make whole')
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -pbc whole'.format(xtc_file,'sample_whole.xtc', gro_file))
         whole_trj =  ('sample_whole.xtc')
