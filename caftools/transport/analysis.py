@@ -37,17 +37,25 @@ def unwrap():
     gro_file = ('sample.gro')
     tpr_file = ('sample.tpr')
     if os.path.isfile(xtc_file) and os.path.isfile(gro_file):
-        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -pbc nojump'.format(xtc_file,'sample_unwrapped.xtc', tpr_file))
+        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc nojump'.format(xtc_file, 'sample_unwrapped.xtc', tpr_file))
         unwrapped_trj = ('sample_unwrapped.xtc')
-        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -pbc res'.format(xtc_file, 'sample_res.xtc', tpr_file))
+        
+        #com_trj = ( 'sample_com.xtc')
+        #unwrapped_com_trj = ('sample_com_unwrapped.xtc')
+        
+        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc res'.format(xtc_file, 'sample_res.xtc', tpr_file))
         res_trj = ('sample_res.xtc')
-        trj_1 = md.load(res_trj, top=gro_file)
-        trj_2 = md.load(unwrapped_trj, top=gro_file)
-        comtrj = make_comtrj(trj_2)
+        trj = md.load(res_trj, top=gro_file)
+        trj = md.load(unwrapped_trj, top=gro_file)
+        comtrj = make_comtrj(trj)
         comtrj.save_xtc('sample_com_unwrapped.xtc')
-        comtrj[-1].save_gro('com.gro')
+        comtrj[-1].save_gro('comtest.gro')
         print('make whole')
-        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -pbc whole'.format(xtc_file,'sample_whole.xtc', gro_file))
+        
+        #whole_trj =  ('sample_whole.xtc')
+        #whole_com_trj = ('sample_com_whole.xtc')
+        
+        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc whole'.format(xtc_file,'sample_whole.xtc', gro_file))
         whole_trj =  ('sample_whole.xtc')
         trj_whole = md.load(whole_trj, top=gro_file)
         trj_whole_com = make_comtrj(trj_whole)
