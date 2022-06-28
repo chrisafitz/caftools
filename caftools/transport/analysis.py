@@ -261,8 +261,16 @@ def density(molecule):
             cutoff += 0.01
         return rhos,cutoffs
     
+    
+    top_file = ('sample.gro')
+    trj_file = ('sample_com_whole.xtc')
+    trj = md.load(trj_file,top = top_file,stride = 100)
+    com_whole = make_comtrj(trj)
+    com_whole[-1].save_gro('com_whole.gro')
+    
+    
     print('loading trj')
-    top_file = ('com.gro')
+    top_file = (com_whole)
     trj_file = ('sample_com_whole.xtc')
     trj = md.load(trj_file, top=top_file,stride = 500)
     weight = {
