@@ -47,6 +47,14 @@ def unwrap():
         comtrj.save_xtc('sample_com_unwrapped.xtc')
         comtrj[-1].save_gro('com.gro')
         print('make whole')
+        
+        top_file = ('sample.gro')
+        trj_file = ('sample_com_whole.xtc')
+        trj = md.load(trj_file,top = top_file,stride = 100)
+        com_whole = make_comtrj(trj)
+        com_whole[-1].save_gro('com_whole.gro')
+    
+    
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -pbc whole'.format(xtc_file,'sample_whole.xtc', gro_file))
         whole_trj =  ('sample_whole.xtc')
         trj_whole = md.load(whole_trj, top=gro_file)
@@ -262,15 +270,11 @@ def density(molecule):
         return rhos,cutoffs
     
     
-    top_file = ('sample.gro')
-    trj_file = ('sample_com_whole.xtc')
-    trj = md.load(trj_file,top = top_file,stride = 100)
-    com_whole = make_comtrj(trj)
-    com_whole[-1].save_gro('com_whole.gro')
+  
     
     
     print('loading trj')
-    top_file = (com_whole)
+    top_file = ('com_whole.gro')
     trj_file = ('sample_com_whole.xtc')
     trj = md.load(trj_file, top=top_file,stride = 500)
     weight = {
