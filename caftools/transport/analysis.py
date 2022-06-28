@@ -48,8 +48,8 @@ def unwrap():
         comtrj[-1].save_gro('com.gro')
         print('make whole')
         
-        top_file = ('sample.gro')
-        trj_file = ('sample_com_whole.xtc')
+        top_file = (gro_file)
+        trj_file = (res_trj)
         trj = md.load(trj_file,top = top_file,stride = 100)
         com_whole = make_comtrj(trj)
         com_whole[-1].save_gro('com_whole.gro')
