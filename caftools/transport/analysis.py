@@ -64,22 +64,23 @@ def unwrap():
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc res'.format(xtc_file, 'sample_res.xtc', tpr_file))
         res_trj = ('sample_res.xtc')
         
+        '''
         trj1 = md.load(res_trj, top=gro_file)
         trj2= md.load(unwrapped_trj, top=gro_file)
         comtrj = make_comtrj(trj2)
-        print(comtrj)
-        comtrj.save_xtc('sample_com_unwrapped.xtc')
-        comtrj[-1].save_gro('comtest.gro')
+        comtrj.save_xtc('unwrapped_com_trj')
+        comtrj[-1].save_gro('com.gro')
         print('make whole')
+        '''
         
-        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc whole'.format(xtc_file,'sample_whole.xtc', gro_file))
-        whole_trj =  ('sample_whole.xtc')
+        os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc whole'.format(xtc_file, 'sample_whole.xtc', gro_file))
+        whole_trj = ('sample_whole.xtc')
+        whole_com_trj =('sample_com_whole.xtc')
         trj_whole = md.load(whole_trj, top=gro_file)
         trj_whole_com = make_comtrj(trj_whole)
-        trj_whole_com[-1].save_gro('comtest.gro')
-        print('make whole')
+        trj_whole_com[-1].save_gro('com.gro')
         print('saving')
-        trj_whole_com.save_xtc('sample_com_whole.xtc')
+        trj_whole_com.save_xtc(whole_com_trj)
         print(trj_whole_com)
  
  
