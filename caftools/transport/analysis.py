@@ -324,8 +324,6 @@ def density(molecule):
             l.append(particle.tolist())
         index.append(l)
     print("Sliced selection in pore!")
-    print(index)
-    print(np.shape(index))
     
     stride = 50
     my_list = [*range(0, len(index), stride)]
