@@ -76,8 +76,11 @@ def unwrap():
         whole_trj =  ('sample_whole.xtc')
         trj_whole = md.load(whole_trj, top=gro_file)
         trj_whole_com = make_comtrj(trj_whole)
+        trj_whole_com[-1].save_gro('comtest.gro')
+        print('make whole')
         print('saving')
         trj_whole_com.save_xtc('sample_com_whole.xtc')
+        print(trj_whole_com)
  
  
 ### Mean Squared Displacement
