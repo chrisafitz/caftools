@@ -274,8 +274,8 @@ def density(molecule):
     def tuning_cutoff(index,my_l,pmol):
         cutoffs = []
         rhos = []
-        cutoff = 0.2
-        while cutoff <= 0.5:
+        cutoff = 0.1
+        while cutoff <= 0.3:
             vol = 4/3*np.pi* ((cutoff+0.025)**3)
             dens_l = kdtree(index, cutoff, vol, my_l, pmol)
             average = ([np.mean(np.array(x)) for x in dens_l])
