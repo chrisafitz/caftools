@@ -126,8 +126,8 @@ def msd():
         chunked_trj= trj[2*chunk:]
         chunked_res = stats.linregress(chunked_trj.time,chunked_MSD)
         
-        slope = '{:.2e}'.format(res.slope)
-        dif_c = '{:.2e}'.format((res.slope)*(1/(1*(10**18)))*(1/6)*(1*(10**12)))
+        slope = '{:.2e}'.format(chunked_res.slope)
+        dif_c = '{:.2e}'.format((chunked_res.slope)*(1/(1*(10**18)))*(1/6)*(1*(10**12)))
         stddev = '{:.2e}'.format(stdev)
         ax.text(((max(trj.time)/6)*1.5), (max(MSD)/5)*4.5,"Slope: {} nm^2/ps \n Diffussion coef: {} +- {} m^2/s \n T:{}K \n ".format(slope,dif_c,stddev,tempe) , horizontalalignment='center', verticalalignment = 'center',bbox=dict(facecolor='orange', alpha=0.2))
         ax.set_xlabel('Simulation time (ps)')
