@@ -91,7 +91,7 @@ def msd():
     def _run_overall(trj, mol):
         D, full_MSD, x_fit, y_fit = calc_msd(trj)
         chunks = 5
-        each = len(MSD)//chunks
+        each = len(full_MSD)//chunks
         MSD = full_MSD[2*each:]
         print(D)
         
