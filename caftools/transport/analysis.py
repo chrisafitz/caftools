@@ -114,6 +114,7 @@ def msd():
         np.savetxt( 'msd-{}-overall-{}.txt'.format(mol, name),np.transpose(np.vstack([trj.time, MSD])),header='# Time (ps)\tMSD (nm^2)')
         tempe = 298 #write the temperature
         res = stats.linregress(trj.time, MSD)
+        print(len(res))
         fig, ax = plt.subplots()
         ax.plot(trj.time, MSD)
         ax.plot(trj.time, res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
@@ -129,7 +130,7 @@ def msd():
     def _run_multiple(trj):
         D_pop = list()
         num_frame = trj.n_frames
-        chunk = 5000
+        chunk = 500
         for start_frame in np.linspace(0, num_frame - chunk, num = 200, dtype=int):
             end_frame = start_frame + chunk
             sliced_trj = trj[start_frame:end_frame]
