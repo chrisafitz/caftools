@@ -99,7 +99,7 @@ def msd():
         start_frame = 0
         D_values = []
         for i in range(n_chunks):
-            if i == 0:
+            if i == 0 or i == 1:
                 pass
             else:
                 traj_chunk = sliced[i*each_chunk:(i+1)*each_chunk]
@@ -165,7 +165,7 @@ def msd():
         sliced = trj.atom_slice(indices)
         print("Sliced selection in pore!")
         D, MSD = _run_overall(sliced, mol)
-        stdev = _std(sliced,3)
+        stdev = _std(sliced,5)
         _save_overall( mol, sliced, MSD, stdev)
         ###
        
