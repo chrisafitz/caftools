@@ -89,11 +89,7 @@ def unwrap():
 def msd():
 
     def _run_overall(trj, mol):
-        D, full_MSD, x_fit, y_fit = calc_msd(trj)
-        chunks = 5
-        each = len(full_MSD)//chunks
-        MSD = full_MSD[2*each:]
-        print(D)
+        D, MSD, x_fit, y_fit = calc_msd(trj)
         
         return D, MSD
     
@@ -116,7 +112,7 @@ def msd():
     
     def _save_overall( mol, trj, full_MSD, stdev):
         name = "Christopher_2022"
-        np.savetxt( 'msd-{}-overall-{}.txt'.format(mol, name),np.transpose(np.vstack([trj.time, full_MSD])),header='# Time (ps)\tMSD (nm^2)')
+        np.savetxt( 'msd-{}-overall-{}.txt'.format(mol, name),np.transpose(np.vstack([trj.time, MSD])),header='# Time (ps)\tMSD (nm^2)')
         tempe = 298 #write the temperature
         res = stats.linregress(trj.time, MSD)
         fig, ax = plt.subplots()
