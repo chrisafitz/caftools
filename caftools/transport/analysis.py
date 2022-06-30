@@ -91,7 +91,7 @@ def msd():
     def _run_overall(trj, mol):
         D, MSD, x_fit, y_fit = calc_msd(trj)
         
-        print(len(D))
+        print(D)
         
         return D, MSD
     
