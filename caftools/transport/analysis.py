@@ -84,7 +84,7 @@ def msd():
         return stdev
         
     
-    def _save_overall( mol, trj, full_MSD, stdev):
+    def _save_overall( mol, trj, MSD, stdev):
         name = "Christopher_2022"
         np.savetxt( 'msd-{}-overall-{}.txt'.format(mol, name),np.transpose(np.vstack([trj.time, MSD])),header='# Time (ps)\tMSD (nm^2)')
         tempe = 298 #write the temperature
