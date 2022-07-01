@@ -126,7 +126,7 @@ def msd():
         chunked_trj= trj[2*chunk:]
         chunked_res = stats.linregress(chunked_trj.time,chunked_MSD)
         
-        ax.plot(chunked_trj.time,chunked_res.intercept + chunked_res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
+        ax.plot(chunked_trj.time,chunked_res.intercept + chunked_res.slope*(chunked_trj.time), 'r', alpha=0.3, linewidth= 0.8)
         slope = '{:.2e}'.format(chunked_res.slope)
         dif_c = '{:.2e}'.format((chunked_res.slope)*(1/(1*(10**18)))*(1/6)*(1*(10**12)))
         stddev = '{:.2e}'.format(stdev)
