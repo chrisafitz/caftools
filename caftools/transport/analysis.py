@@ -134,7 +134,7 @@ def msd():
         ax.set_xlabel('Simulation time (ps)')
         ax.set_ylabel('MSD (nm^2)')
         fig.suptitle('MSD for {}'.format(mol))
-        fig.savefig('msd-{}-overall-{}.pdf'.format(mol,name))
+        #fig.savefig('msd-{}-overall-{}.pdf'.format(mol,name))
     
     def _run_multiple(trj):
         D_pop = list()
@@ -177,7 +177,7 @@ def msd():
         D, MSD = _run_overall(sliced, mol)
         stdev = _std(sliced,5)
         _save_overall( mol, sliced, MSD, stdev)
-        ###
+
        
        
 ### Radial Distribution Function
