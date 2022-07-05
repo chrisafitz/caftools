@@ -125,8 +125,8 @@ def msd():
 
 
     print('Loading trj ')
-    top_file = ('com.gro')
-    trj_file = ('sample_com_unwrapped.xtc')
+    top_file = ('sample.gro')
+    trj_file = ('sample_whole.xtc')
     trj = md.load(trj_file,top=top_file)
     temp = 298  #write temperature as number  298
 
