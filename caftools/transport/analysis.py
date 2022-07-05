@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import mdtraj as md
 import MDAnalysis as mda
 from mtools.gromacs.gromacs import make_comtrj
-from mtools.gromacs.gromacs import save_gro
 from mtools.gromacs.gromacs import unwrap_trj
 from mtools.post_process import calc_msd
 from mtools.post_process import compute_cn
