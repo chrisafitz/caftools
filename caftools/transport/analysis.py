@@ -234,7 +234,7 @@ def neconductivity(ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion a
 
     conductivity = N / (V*kT) * q ** 2 * (D_cat + D_an)
     ms_cm = conductivity * 10000
-    print("The Nernst-Einstein conductivity is: " + str(conductivity) + " or: " + str(ms_cm) " microsiemens/cm")
+    print("The Nernst-Einstein conductivity is: {} or {} microsiemens/cm".format(conductivity,ms_cm))
     with open("NE_Conductivity.txt","w") as file:
         file.write("The Nernst-Einstein conductivity is: "+ str(conductivity))
         
