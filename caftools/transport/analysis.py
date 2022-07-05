@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import mdtraj as md
 import MDAnalysis as mda
 from mtools.gromacs.gromacs import make_comtrj
+from mtools.gromacs.gromacs import save_gro
 from mtools.gromacs.gromacs import unwrap_trj
 from mtools.post_process import calc_msd
 from mtools.post_process import compute_cn
@@ -45,12 +46,13 @@ def unwrap():
         
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc res'.format(xtc_file, 'sample_res.xtc', tpr_file))
         res_trj = 'sample_res.xtc'
-        trj = md.load(res_trj, top=gro_file)
+        trj = md.load(unwrapped_trj, top=gro_file)
         #trj = md.load(unwrapped_trj, top=gro_file)
         print(trj)
         comtrj = make_comtrj(trj)
         comtrj.save_xtc('sample_com_unwrapped.xtc')
-        comtrj[-1].save_gro('com.gro')
+        one = comtrj[-1]
+        one.save_gro('com.gro')
         print('make whole')
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc whole'.format(xtc_file, 'sample_whole.xtc', gro_file))
         whole_trj = ('sample_whole.xtc')
