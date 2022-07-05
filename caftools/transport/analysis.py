@@ -206,7 +206,7 @@ def rdf(atom1,atom2,stride=100):         # ex for atom1 -- resname bmim and name
 
 
 ### Nernst-Einstein Conductivity
-def neconductivity(ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion as ex. 'resname tfsi'
+def neconductivity(either_ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion as ex. 'resname tfsi'
 
     # ion - enter as ex. 'resname tfsi'
     # D_cat/D_an - enter D of both from msd in m^2/s
@@ -217,7 +217,7 @@ def neconductivity(ion,D_cat,D_an,V=343,T=298,q=1,stride=100):   ### enter ion a
     top_file = ('com.gro')
     trj_file = ('sample_com_unwrapped.xtc')
     trj = md.load(trj_file, top=top_file, stride = stride)
-    ion = trj.topology.select(ion)
+    ion = trj.topology.select(either_ion)
 
 
     N = 2*len(ion)
