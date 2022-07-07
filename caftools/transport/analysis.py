@@ -18,6 +18,7 @@ from progressbar import ProgressBar
 import warnings
 import scipy.spatial as ss
 from mdtraj.core.element import virtual_site
+from statistics import mean
 
 
 
@@ -104,9 +105,9 @@ def msd():
             chunked_MSD = MSD[chunk*length:(chunk+1)*length]
             chunked_trj = trj[chunk*length:(chunk+1)*length]
             chunked_res = stats.linregress(chunked_trj.time,chunked_MSD)
-            average = stats.mean(chunked_res)
+            average = mean(chunked_res)
             MSD_chunked.append(average)
-        print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(stats.mean(MSD_chunked)))
+        print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(mean(MSD_chunked)))
         
         
         ax.plot(trj.time,res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
