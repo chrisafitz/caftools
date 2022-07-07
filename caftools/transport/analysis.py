@@ -105,7 +105,7 @@ def msd():
             d,msd = _run_overall(chunked_trj,mol)
             diff_chunked.append(d)
             res_chunk = stats.linregress(chunked_trj.time,msd)
-            ress.append(res_chunk)
+            ress.append(res_chunk.slope)
         print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(mean(diff_chunked)))
         print('The standard deviation of the data is: {}'.format(np.std(diff_chunked)))
         print('slope is: {}'.format(mean(ress)))
