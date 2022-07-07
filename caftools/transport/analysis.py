@@ -94,8 +94,8 @@ def msd():
         fig, ax = plt.subplots()
         ax.plot(trj.time, MSD)
         
-        
-        # stats from chunked portion of simulation
+        '''
+        # stats from chunked portions of simulation
         chunks = 5
         length = len(MSD)//chunks
         diff_chunked = []
@@ -110,6 +110,7 @@ def msd():
         print('The standard deviation of the data is: {}'.format(np.std(diff_chunked)))
         print('slope is: {}'.format(mean(ress)))
         ax.plot(trj.time,mean(ress) + mean(ress)*(trj.time), 'b', alpha=0.8, linewidth= 0.8)
+        '''
         
         ax.plot(trj.time,res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
         slope = '{:.2e}'.format(res.slope)
@@ -119,7 +120,7 @@ def msd():
         ax.set_xlabel('Simulation time (ps)')
         ax.set_ylabel('MSD (nm^2)')
         fig.suptitle('MSD for {}'.format(mol))
-        #fig.savefig('msd-{}-overall-{}.pdf'.format(mol,name))
+        fig.savefig('msd-{}-overall-{}.pdf'.format(mol,name))
     
     def _run_multiple(trj):
         D_pop = list()
