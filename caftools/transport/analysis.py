@@ -78,12 +78,9 @@ def msd():
         start_frame = 0
         D_values = []
         for i in range(n_chunks):
-            if i == 0 or i == 1:
-                pass
-            else:
-                traj_chunk = sliced[i*each_chunk:(i+1)*each_chunk]
-                D, MSD = _run_overall(traj_chunk, mol)
-                D_values.append(D)           
+            traj_chunk = sliced[i*each_chunk:(i+1)*each_chunk]
+            D, MSD = _run_overall(traj_chunk, mol)
+            D_values.append(D)           
         stdev = np.std(D_values)
         return stdev
         
@@ -100,13 +97,13 @@ def msd():
         # stats from chunked portion of simulation
         chunks = 5
         length = len(MSD)//chunks
-        MSD_chunked = []
+        diff_chunked = []
         for chunk in range(chunks):
-            chunked_MSD = MSD[chunk*length:(chunk+1)*length]
             chunked_trj = trj[chunk*length:(chunk+1)*length]
             d,msd = _run_overall(chunked_trj,mol)
-            MSD_chunked.append(d)
-        print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(mean(MSD_chunked)))
+            diff_chunked.append(d)
+        print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(mean(diff_chunked)))
+        print('The standard deviation of the data is: {}'.format(np.std(diff_chunked)))
         
         
         ax.plot(trj.time,res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
