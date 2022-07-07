@@ -100,7 +100,7 @@ def msd():
         chunks = 5
         length = len(MSD)//chunks
         MSD_chunked = []
-        for chunk in range(len(chunks)):
+        for chunk in range(chunks):
             chunked_MSD = MSD[chunk*length:(chunk+1)*length]
             chunked_trj = trj[chunk*length:(chunk+1)*length]
             chunked_res = stats.linregress(chunked_trj.time,chunked_MSD)
