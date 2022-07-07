@@ -98,12 +98,16 @@ def msd():
         chunks = 5
         length = len(MSD)//chunks
         diff_chunked = []
+        ress = []
         for chunk in range(chunks):
             chunked_trj = trj[chunk*length:(chunk+1)*length]
             d,msd = _run_overall(chunked_trj,mol)
             diff_chunked.append(d)
+            res_chunk = stats.linregress(chunked_trj.time,msd)
+            ress.append(res_chunk)
         print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(mean(diff_chunked)))
         print('The standard deviation of the data is: {}'.format(np.std(diff_chunked)))
+        print('slope is: {}'.format(mean(ress)))
         
         
         ax.plot(trj.time,res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
