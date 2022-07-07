@@ -109,7 +109,7 @@ def msd():
         print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(mean(diff_chunked)))
         print('The standard deviation of the data is: {}'.format(np.std(diff_chunked)))
         print('slope is: {}'.format(mean(ress)))
-        ax.plot(trj.time,ress + ress*(trj.time), 'b', alpha=0.8, linewidth= 0.8)
+        ax.plot(trj.time,mean(ress) + mean(ress)*(trj.time), 'b', alpha=0.8, linewidth= 0.8)
         
         ax.plot(trj.time,res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
         slope = '{:.2e}'.format(res.slope)
