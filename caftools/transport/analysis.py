@@ -105,7 +105,7 @@ def msd():
             chunked_MSD = MSD[chunk*length:(chunk+1)*length]
             chunked_trj = trj[chunk*length:(chunk+1)*length]
             d,msd = _run_overall(chunked_trj,mol)
-            MSD_chunked.append(mean(d))
+            MSD_chunked.append(d)
         print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(mean(MSD_chunked)))
         
         
