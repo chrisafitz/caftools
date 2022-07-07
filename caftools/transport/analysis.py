@@ -90,6 +90,7 @@ def msd():
         np.savetxt( 'msd-{}-overall-{}.txt'.format(mol, name),np.transpose(np.vstack([trj.time, MSD])),header='# Time (ps)\tMSD (nm^2)')
         tempe = 298 #write the temperature
         res = stats.linregress(trj.time,MSD)
+        print(res)
         fig, ax = plt.subplots()
         ax.plot(trj.time, MSD)
         
