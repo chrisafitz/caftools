@@ -98,10 +98,16 @@ def msd():
         
         # stats from chunked portion of simulation
         chunks = 5
-        chunk = len(MSD)//5
-        chunked_MSD = MSD[2*chunk:]
-        chunked_trj= trj[2*chunk:]
-        chunked_res = stats.linregress(chunked_trj.time,chunked_MSD)
+        length = len(MSD)//chunks
+        MSD_chunked = []
+        for chunk in range(len(chunks)):
+            chunked_MSD = MSD[chunk*length:(chunk+1)*length]
+            chunked_trj = trj[chunk*length:(chunk+1)*length]
+            chunked_res = stats.linregress(chunked_trj.time,chunked_MSD)
+            average = stats.mean(chunked_res)
+            MSD_chunked.append(average)
+        print('THIS IS THE AVERAGE FROM 5 SLICES: {}'.format(stats.mean(MSD_chunked)))
+        
         
         ax.plot(trj.time,res.intercept + res.slope*(trj.time), 'r', alpha=0.3, linewidth= 0.8)
         slope = '{:.2e}'.format(res.slope)
