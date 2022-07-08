@@ -505,7 +505,7 @@ def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
     print(selections)
     keys = list(selections.keys())
     if len(keys) == 1:
-        keys[1] = keys[0]
+        keys.append(keys[0])
         
     combos = combinations(keys,2)
     print(combos)
