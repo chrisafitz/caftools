@@ -502,7 +502,7 @@ def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
     elif 'acn' in atom2 or 'wat' in atom2:
         selections['solvent'] = atom2
 
-    
+    print(selections)
 
     combos = combinations(list(selections.keys()),2)
     chunk_length = 200 # frames, 10 fs output
