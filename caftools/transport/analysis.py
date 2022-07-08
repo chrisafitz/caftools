@@ -42,8 +42,6 @@ def unwrap():
 
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc nojump'.format(xtc_file, 'sample_unwrapped.xtc', tpr_file))
         unwrapped_trj = ('sample_unwrapped.xtc')
-        
-        
         os.system('echo 0 | gmx trjconv -f {0} -o {1} -s {2} -skip 10 -pbc res'.format(xtc_file, 'sample_res.xtc', tpr_file))
         res_trj = 'sample_res.xtc'
         trj = md.load(res_trj, top=gro_file)
