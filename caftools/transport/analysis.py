@@ -496,7 +496,7 @@ def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
     elif 'acn' in atom1 or 'wat' in atom1:
         selections['solvent'] = atom1
     if 'li' in atom2 or 'emim' in atom2 or 'bmim' in atom2:
-        selections['cation'] =atom2
+        selections['cation'] = atom2
     elif 'tfsi' in atom2:
         selections['anion'] = atom2
     elif 'acn' in atom2 or 'wat' in atom2:
@@ -505,6 +505,9 @@ def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
     print(selections)
 
     combos = combinations(list(selections.keys()),2)
+    print(combos)
+    
+    
     chunk_length = 200 # frames, 10 fs output
     cpu_count = 32
     n_chunks = 2000 # make higher if more averaging needed for smoother curves
