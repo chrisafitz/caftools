@@ -503,8 +503,11 @@ def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
         selections['solvent'] = atom2
 
     print(selections)
-
-    combos = combinations(list(selections.keys()),2)
+    keys = list(selections.keys())
+    if len(keys) == 1:
+        keys[1] = keys[0]
+        
+    combos = combinations(keys,2)
     print(combos)
     
     
