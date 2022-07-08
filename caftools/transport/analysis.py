@@ -188,8 +188,11 @@ def rdf(atom1,atom2,stride=100):         # ex for atom1 -- resname bmim and name
     elif 'acn' in atom2 or 'water' in atom2:
         selections['solvent'] = trj.topology.select(atom2)
     
-
-    combos = combinations(list(selections.keys()),2)
+    keys = list(selections.keys())
+    if len(keys) == 1:
+        keys.append(keys[0])
+        
+    combos = combinations(keys,2)
 
     for combo in combos:
         if len(selections[combo[0]]) != 0 and len(selections[combo[1]]) != 0:
@@ -508,7 +511,6 @@ def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
         keys.append(keys[0])
         
     combos = combinations(keys,2)
-    print(combos)
     
     
     chunk_length = 200 # frames, 10 fs output
