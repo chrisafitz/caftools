@@ -475,9 +475,9 @@ def vhf(atom1,atom2,temp=298,stride=100,numplots = 3):
     
     #dd = md.compute_vhf
     print('loading trj')
-    top_file = ('sample.gro')
+    top_file = ('com.gro')
     #trj_file = ('sample_whole.xtc')
-    trj_file = ('sample.xtc')
+    trj_file = ('sample_com_unwrapped.xtc')
     trj = md.load(trj_file, top=top_file)
     
     #temp = job.statepoint()["temperature"]
