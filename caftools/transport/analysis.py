@@ -167,8 +167,8 @@ def msd():
 def rdf(atom1,atom2,stride=100):         # ex for atom1 -- resname bmim and name N
     
     print('Loading trj ')
-    top_file = ('sample.gro')
-    trj_file = ('sample.xtc')
+    top_file = ('com.gro')
+    trj_file = ('sample_com_whole.xtc')
     trj = md.load(trj_file, top=top_file, stride = stride)
     print(trj.n_frames)
     #first_frame = trj[0]
