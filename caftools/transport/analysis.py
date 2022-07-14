@@ -145,7 +145,12 @@ def msd():
                         'tfsi': trj.top.select("resname tfsi"),
                         'water': trj.top.select("resname water"),
                         'emim': trj.top.select("resname emim"),
-                        'bmim': trj.top.select("resname bmim")
+                        'bmim': trj.top.select("resname bmim"),
+                        'hmim': trj.top.select('resname hmim'),
+                        'omim': trj.top.select('resname omim'),
+                        'toluene': trj.top.select('resname toluene'),
+                        'acetone': trj.top.select('resname acetone'),
+                        'methanol': trj.top.select('resname methanol')
                         }
 
 
