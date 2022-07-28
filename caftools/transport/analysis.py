@@ -286,7 +286,7 @@ def density(molecule):
         rhos = []
         cutoff = 0.1
         while cutoff <= 0.3:
-            vol = 4/3*np.pi* ((cutoff+0.025)**3)
+            vol = 4/3*np.pi* ((cutoff+0.017)**3)
             dens_l = kdtree(index, cutoff, vol, my_l, pmol)
             average = ([np.mean(np.array(x)) for x in dens_l])
             avg = round(np.mean(np.array(average)), 2)
@@ -353,7 +353,7 @@ def density(molecule):
     
     cutoff = cutoff_list[minimum_val]
     stride = 50
-    vol = 4/3*np.pi* ((cutoff+0.0197)**3)
+    vol = 4/3*np.pi* ((cutoff+0.017)**3)
     time = trj.time
     time_list = [time[x] for x in my_list]
     dens_l = kdtree(index, cutoff, vol, my_l, pmol)
