@@ -353,7 +353,7 @@ def density(molecule):
     
     cutoff = cutoff_list[minimum_val]
     stride = 50
-    vol = 4/3*np.pi* ((cutoff+0.0152)**3)
+    vol = 4/3*np.pi* ((cutoff+0.17)**3)
     time = trj.time
     time_list = [time[x] for x in my_list]
     dens_l = kdtree(index, cutoff, vol, my_l, pmol)
